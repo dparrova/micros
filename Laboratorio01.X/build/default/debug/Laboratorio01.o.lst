@@ -1,4 +1,4 @@
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  1
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[203]: Found opcode in column 1. (addwf)
 000014 2601           00028 addwf aux2
                       00029 
 000016                00030 punto3
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  2
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Warning[203]: Found opcode in column 1. (mulwf)
                       00059 
 000042                00060 punto7
 Warning[203]: Found opcode in column 1. (movlw)
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  3
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -159,12 +159,90 @@ Warning[203]: Found opcode in column 1. (movf)
 00005E 5000           00081 movf aux1,w
 Warning[203]: Found opcode in column 1. (iorwf)
 000060 1201           00082 iorwf aux2
-                      00083 
+                      00083  
+                      00084 ;Ejercicio 11
+000062 0E3E           00085  movlw .62
+000064 6E00           00086  movwf aux1
+000066 0B0F           00087  andlw .15
+                      00088  ;mover lo que esta en w a un registro
+000068 6E00           00089  movwf aux1
+                      00090  ;variables inicializadas en tres sistemas numericos
+                      00091  
+                      00092  ;Ejercicio 12
+00006A 0E2D           00093  movlw .45
+00006C 6E01           00094  movwf aux2
+00006E 0E64           00095  movlw .100
+000070 6E00           00096  movwf aux1
+000072 1601           00097  andwf aux2
+                      00098  
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00099  ;Ejercicio 13
+000074 0E78           00100  movlw .120
+000076 6E00           00101  movwf aux1
+000078 1A01           00102  xorwf .1
+00007A 6E01           00103  movwf aux2
+                      00104  
+                      00105  ;Ejercicio 14
+00007C 0E11           00106  movlw .17
+00007E 6E00           00107  movwf aux1
+000080 0E5A           00108  movlw .90
+000082 6E01           00109  movwf aux2
+000084 1800           00110  xorwf aux1,w
+000086 6E0A           00111  movwf aux3
+                      00112 
+                      00113  ;Ejercicio 15
+000088 0E19           00114  movlw .25
+00008A 6E00           00115  movwf aux1
+00008C 0E28           00116  movlw .40 
+00008E 6E01           00117  movwf aux2
+000090 0E67           00118  movlw .103
+000092 6E0A           00119  movwf aux3
+000094 500A           00120  movf aux3,w
+000096 0AD0           00121  xorlw 0xD0
+000098 6E0A           00122  movwf aux3
+00009A 5000           00123  movf aux1,w
+00009C 1001           00124  iorwf aux2,w
+00009E 6E00           00125  movwf aux1
+0000A0 140A           00126  andwf aux3,w
+0000A2 6E03           00127  movwf aux4
+                      00128  
+                      00129  ;Ejercicio 16
+0000A4 0E12           00130  movlw .18
+0000A6 6E00           00131  movwf aux1
+0000A8 0E3C           00132  movlw .60 
+0000AA 6E01           00133  movwf aux2
+0000AC 0E10           00134  movlw .16
+0000AE 6E0A           00135  movwf aux3
+0000B0 500A           00136  movf aux3,w
+0000B2 081A           00137  sublw b'11010'
+0000B4 6E0A           00138  movwf aux3
+0000B6 5000           00139  movf aux1,w
+0000B8 2401           00140  addwf aux2,w
+0000BA 6E00           00141  movwf aux1
+0000BC 500A           00142  movf aux3,w
+0000BE 0D03           00143  mullw .3
+0000C0 50F3           00144  movf PRODL,w
+0000C2 6E0A           00145  movwf aux3
+0000C4 500A           00146  movf aux3,w
+0000C6 5C00           00147  subwf aux1,w
+0000C8 6E03           00148  movwf aux4
+                      00149 
 Warning[203]: Found opcode in column 1. (goto)
-000062 EF00 F000      00084 goto Inicio ;simpre debe exister un apuntador para que se ejecute siempre
+0000CA EF00 F000      00150 goto Inicio ;simpre debe exister un apuntador para que se ejecute siempre
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 Warning[205]: Found directive in column 1. (end)
-                      00085 end
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  4
+                      00151 end
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  6
 
 
 SYMBOL TABLE
@@ -223,7 +301,7 @@ BRG16                             00000003
 BRGH                              00000002
 BSR                               00000FE0
 BTOEE                             00000004
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  5
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  7
 
 
 SYMBOL TABLE
@@ -282,7 +360,7 @@ CM2                               00000002
 CMCON                             00000FB4
 CMIE                              00000006
 CMIF                              00000006
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  6
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  8
 
 
 SYMBOL TABLE
@@ -341,7 +419,7 @@ EEIP                              00000004
 EEPGD                             00000007
 ENDP0                             00000003
 ENDP1                             00000004
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  7
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE  9
 
 
 SYMBOL TABLE
@@ -400,7 +478,7 @@ HLVDL3                            00000003
 I2C_DAT                           00000005
 I2C_READ                          00000002
 I2C_START                         00000003
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  8
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 10
 
 
 SYMBOL TABLE
@@ -459,7 +537,7 @@ LATA5                             00000005
 LATA6                             00000006
 LATB                              00000F8A
 LATB0                             00000000
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE  9
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 11
 
 
 SYMBOL TABLE
@@ -518,7 +596,7 @@ NOT_RI                            00000004
 NOT_T1SYNC                        00000002
 NOT_T3SYNC                        00000002
 NOT_TO                            00000003
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 10
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 12
 
 
 SYMBOL TABLE
@@ -577,7 +655,7 @@ PORTA                             00000F80
 PORTB                             00000F81
 PORTC                             00000F82
 PORTD                             00000F83
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 11
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 13
 
 
 SYMBOL TABLE
@@ -636,7 +714,7 @@ RC6                               00000006
 RC7                               00000007
 RCEN                              00000003
 RCIDL                             00000006
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 12
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 14
 
 
 SYMBOL TABLE
@@ -695,7 +773,7 @@ SPP2                              00000002
 SPP3                              00000003
 SPP4                              00000004
 SPP5                              00000005
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 13
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 15
 
 
 SYMBOL TABLE
@@ -754,7 +832,7 @@ T0IP                              00000002
 T0PS0                             00000000
 T0PS1                             00000001
 T0PS2                             00000002
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 14
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 16
 
 
 SYMBOL TABLE
@@ -813,7 +891,7 @@ TMR3                              00000FB2
 TMR3CS                            00000001
 TMR3H                             00000FB3
 TMR3IE                            00000001
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 15
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 17
 
 
 SYMBOL TABLE
@@ -872,7 +950,7 @@ TRMT                              00000001
 TRNIE                             00000003
 TRNIF                             00000003
 TUN0                              00000000
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 16
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 18
 
 
 SYMBOL TABLE
@@ -931,7 +1009,7 @@ USBIF                             00000005
 USBIP                             00000005
 USTAT                             00000F6C
 UTEYE                             00000007
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 17
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 19
 
 
 SYMBOL TABLE
@@ -990,7 +1068,7 @@ _CP3_ON_5L                        000000F7
 _CPB_OFF_5H                       000000FF
 _CPB_ON_5H                        000000BF
 _CPD_OFF_5H                       000000FF
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 18
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 20
 
 
 SYMBOL TABLE
@@ -1049,7 +1127,7 @@ _MCLRE_OFF_3H                     0000007F
 _MCLRE_ON_3H                      000000FF
 _PBADEN_OFF_3H                    000000FD
 _PBADEN_ON_3H                     000000FF
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 19
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 21
 
 
 SYMBOL TABLE
@@ -1108,7 +1186,7 @@ _XINST_ON_4L                      000000FF
 __18F4550                         00000001
 __DEBUG                           
 __MPLAB_DEBUGGER_SIMULATOR        1
-MPASM 5.67                 LABORATORIO01.ASM   2-23-2024  15:47:02         PAGE 20
+MPASM 5.67                 LABORATORIO01.ASM   2-28-2024  17:53:28         PAGE 22
 
 
 SYMBOL TABLE
@@ -1133,12 +1211,14 @@ punto9                            0000004E
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
 0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXX---------- ----------------
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXX-- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Bytes Used:   102
-Program Memory Bytes Free: 32666
+Program Memory Bytes Used:   206
+Program Memory Bytes Free: 32562
 
 
 Errors   :     0

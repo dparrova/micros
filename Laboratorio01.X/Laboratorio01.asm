@@ -80,6 +80,72 @@ movlw .90
 movwf aux2
 movf aux1,w
 iorwf aux2
+ 
+;Ejercicio 11
+ movlw .62
+ movwf aux1
+ andlw .15
+ ;mover lo que esta en w a un registro
+ movwf aux1
+ ;variables inicializadas en tres sistemas numericos
+ 
+ ;Ejercicio 12
+ movlw .45
+ movwf aux2
+ movlw .100
+ movwf aux1
+ andwf aux2
+ 
+ ;Ejercicio 13
+ movlw .120
+ movwf aux1
+ xorwf .1
+ movwf aux2
+ 
+ ;Ejercicio 14
+ movlw .17
+ movwf aux1
+ movlw .90
+ movwf aux2
+ xorwf aux1,w
+ movwf aux3
+
+ ;Ejercicio 15
+ movlw .25
+ movwf aux1
+ movlw .40 
+ movwf aux2
+ movlw .103
+ movwf aux3
+ movf aux3,w
+ xorlw 0xD0
+ movwf aux3
+ movf aux1,w
+ iorwf aux2,w
+ movwf aux1
+ andwf aux3,w
+ movwf aux4
+ 
+ ;Ejercicio 16
+ movlw .18
+ movwf aux1
+ movlw .60 
+ movwf aux2
+ movlw .16
+ movwf aux3
+ movf aux3,w
+ sublw b'11010'
+ movwf aux3
+ movf aux1,w
+ addwf aux2,w
+ movwf aux1
+ movf aux3,w
+ mullw .3
+ movf PRODL,w
+ movwf aux3
+ movf aux3,w
+ subwf aux1,w
+ movwf aux4
 
 goto Inicio ;simpre debe exister un apuntador para que se ejecute siempre
 end
