@@ -94,12 +94,14 @@ iorwf aux2
  movwf aux2
  movlw .100
  movwf aux1
+ movf aux1,w
  andwf aux2
  
  ;Ejercicio 13
  movlw .120
  movwf aux1
- xorwf .1
+ movf aux1,w
+ xorlw .1
  movwf aux2
  
  ;Ejercicio 14
