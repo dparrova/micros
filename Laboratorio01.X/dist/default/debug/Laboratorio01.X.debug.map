@@ -1,35 +1,41 @@
 MPLINK 5.08, LINKER
-Linker Map File - Created Thu Feb 29 11:12:46 2024
+Linker Map File - Created Fri Mar 08 14:53:39 2024
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
-                   .org_0       code   0x000000    program   0x0000d2
+                   .org_0       code   0x000000    program   0x0000de
 
 
 
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x0000d1      
-            210 out of 33048 program addresses used, program memory utilization is 0%
+                            0x000000    0x0000dd      
+            222 out of 33048 program addresses used, program memory utilization is 0%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
+              Ejercicio_1   0x000000    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_10   0x000056    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_11   0x000062    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_12   0x00006c    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_13   0x000078    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_14   0x000082    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_15   0x00008e    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_16   0x0000aa    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_2   0x00000a    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_3   0x000016    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_4   0x000020    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_5   0x00002c    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_6   0x000036    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_7   0x000042    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_8   0x000048    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_9   0x00004e    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
                    Inicio   0x000000    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto1   0x000000    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                  punto10   0x000056    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto2   0x00000a    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto3   0x000016    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto4   0x000020    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto5   0x00002c    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto6   0x000036    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto7   0x000042    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto8   0x000048    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto9   0x00004e    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
 
 
 
@@ -37,15 +43,21 @@ Linker Map File - Created Thu Feb 29 11:12:46 2024
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
                    Inicio   0x000000    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto1   0x000000    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto2   0x00000a    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto3   0x000016    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto4   0x000020    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto5   0x00002c    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto6   0x000036    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto7   0x000042    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto8   0x000048    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                   punto9   0x00004e    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
-                  punto10   0x000056    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_1   0x000000    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_2   0x00000a    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_3   0x000016    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_4   0x000020    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_5   0x00002c    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_6   0x000036    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_7   0x000042    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_8   0x000048    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+              Ejercicio_9   0x00004e    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_10   0x000056    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_11   0x000062    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_12   0x00006c    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_13   0x000078    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_14   0x000082    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_15   0x00008e    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
+             Ejercicio_16   0x0000aa    program     static C:\Users\Tomate\Documents\DiegoUNAL\Laboratorio01.X\Laboratorio01.asm
 
 

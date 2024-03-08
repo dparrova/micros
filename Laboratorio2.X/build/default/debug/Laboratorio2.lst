@@ -1,0 +1,55 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                                           Fri Mar 08 14:15:29 2024
+
+
+     1                           	processor	18F4550
+     2                           	pagewidth 132
+     3  0000                     	org	0	;vector de reset org organiza la direccion de la memoria de instrucciones
+     4  0000  EF00' F000'        	goto	Inicio
+     5  0008                     	org	8	;vecto o rutina de interrupción
+     6  0008  EF00' F000'        	goto	ISR
+     7                           tosu	equ	0xFFF
+     8                           tosh	equ	0xFFE
+     9                           tosl	equ	0xFFD
+    10                           stkptr	equ	0xFFC
+    11                           pclatu	equ	0xFFB
+    12                           pclath	equ	0xFFA
+    13                           pcl	equ	0xFF9
+    14                           tblptru	equ	0xFF8
+    15                           tblptrh	equ	0xFF7
+    16                           tblptrl	equ	0xFF6
+    17                           tablat	equ	0xFF5
+    18                           prodh	equ	0xFF4
+    19                           prodl	equ	0xFF3
+    20                           indf0	equ	0xFEF
+    21                           postinc0	equ	0xFEE
+    22                           postdec0	equ	0xFED
+    23                           preinc0	equ	0xFEC
+    24                           plusw0	equ	0xFEB
+    25                           fsr0h	equ	0xFEA
+    26                           fsr0l	equ	0xFE9
+    27                           wreg	equ	0xFE8
+    28                           indf1	equ	0xFE7
+    29                           postinc1	equ	0xFE6
+    30                           postdec1	equ	0xFE5
+    31                           preinc1	equ	0xFE4
+    32                           plusw1	equ	0xFE3
+    33                           fsr1h	equ	0xFE2
+    34                           fsr1l	equ	0xFE1
+    35                           bsr	equ	0xFE0
+    36                           indf2	equ	0xFDF
+    37                           postinc2	equ	0xFDE
+    38                           postdec2	equ	0xFDD
+    39                           preinc2	equ	0xFDC
+    40                           plusw2	equ	0xFDB
+    41                           fsr2h	equ	0xFDA
+    42                           fsr2l	equ	0xFD9
+    43                           status	equ	0xFD8
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                               Fri Mar 08 14:15:29 2024
+
+         ISR 0000*       Inicio 0000*      isa$std 0001     isa$xinst 0000  
