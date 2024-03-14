@@ -69,7 +69,7 @@ Ejercicio_8
 Ejercicio_9
     movlw .35
     movwf aux1
-    movf aux1,w ;radundamos casos?
+    movf aux1,w ;redundamos casos?
     iorlw .7
     movwf aux1
 

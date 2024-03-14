@@ -1,18 +1,19 @@
 
 # 1 "Laboratorio2.asm"
-aux1 equ 0h; equ organiza la memoria de datos
+include <p18f4550.inc>
+;Configuracion
+CONFIG FOSC = ES
+CONFIG WDT = OFF
 
-ORG 0h ;vector de reset org organiza la direccion de la memoria de instrucciones
-goto Inicio
+bsf TRISD,0 ;configura como entrada
+bsf TRISD,1
+bsf TRISD,2
+;variables
 
-ORG 8h ;vecto o rutina de interrupción
-goto ISR
+;instrucciones
 Inicio
+bcf LATD,0
+bsf LATD,0
 
-
-ISR
-
-
-
-
+goto Inicio
 end

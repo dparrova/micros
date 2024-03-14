@@ -1,4 +1,4 @@
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  1
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (include)
 000026 6E01           00040     movwf aux2 
 000028 5000           00041     movf aux1,w 
 00002A 5E01           00042     subwf aux2 ; da como resultado 254 porque es un dato de 8 bites ¡aclarar!
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  2
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -93,112 +93,113 @@ Warning[207]: Found label after column 1. (Ejercicio_5)
 00004E                00069 Ejercicio_9
 00004E 0E23           00070     movlw .35
 000050 6E00           00071     movwf aux1
-000052 0907           00072     iorlw .7
-000054 6E00           00073     movwf aux1
-                      00074 
-000056                00075 Ejercicio_10
-000056 0E14           00076     movlw .20
-000058 6E00           00077     movwf aux1
-00005A 0E38           00078     movlw .56
-00005C 6E01           00079     movwf aux2
-00005E 5000           00080     movf aux1,w
-000060 1201           00081     iorwf aux2
-                      00082  
-000062                00083 Ejercicio_11
-000062 0E3E           00084     movlw .62
-000064 6E00           00085     movwf aux1
-000066 5000           00086     movf aux1,w
-000068 0B0F           00087     andlw .15
-00006A 6E00           00088     movwf aux1
-                      00089  
+000052 5000           00072     movf aux1,w ;redundamos casos?
+000054 0907           00073     iorlw .7
+000056 6E00           00074     movwf aux1
+                      00075 
+000058                00076 Ejercicio_10
+000058 0E14           00077     movlw .20
+00005A 6E00           00078     movwf aux1
+00005C 0E38           00079     movlw .56
+00005E 6E01           00080     movwf aux2
+000060 5000           00081     movf aux1,w
+000062 1201           00082     iorwf aux2
+                      00083  
+000064                00084 Ejercicio_11
+000064 0E3E           00085     movlw .62
+000066 6E00           00086     movwf aux1
+000068 5000           00087     movf aux1,w
+00006A 0B0F           00088     andlw .15
+00006C 6E00           00089     movwf aux1
+                      00090  
 Warning[207]: Found label after column 1. (Ejercicio_12)
-00006C                00090  Ejercicio_12
-00006C 0E2D           00091     movlw .45
-00006E 6E01           00092     movwf aux2
-000070 0E64           00093     movlw .100
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  3
+00006E                00091  Ejercicio_12
+00006E 0E2D           00092     movlw .45
+000070 6E01           00093     movwf aux2
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000072 6E00           00094     movwf aux1
-000074 5000           00095     movf aux1,w
-000076 1601           00096     andwf aux2
-                      00097  
+000072 0E64           00094     movlw .100
+000074 6E00           00095     movwf aux1
+000076 5000           00096     movf aux1,w
+000078 1601           00097     andwf aux2
+                      00098  
 Warning[207]: Found label after column 1. (Ejercicio_13)
-000078                00098  Ejercicio_13
-000078 0E78           00099     movlw .120
-00007A 6E00           00100     movwf aux1
-00007C 5000           00101     movf aux1,w
-00007E 0A01           00102     xorlw .1
-000080 6E01           00103     movwf aux2
-                      00104  
+00007A                00099  Ejercicio_13
+00007A 0E78           00100     movlw .120
+00007C 6E00           00101     movwf aux1
+00007E 5000           00102     movf aux1,w
+000080 0A01           00103     xorlw .1
+000082 6E01           00104     movwf aux2
+                      00105  
 Warning[207]: Found label after column 1. (Ejercicio_14)
-000082                00105  Ejercicio_14
-000082 0E11           00106     movlw .17
-000084 6E00           00107     movwf aux1
-000086 0E5A           00108     movlw .90
-000088 6E01           00109     movwf aux2
-00008A 1800           00110     xorwf aux1,w
-00008C 6E02           00111     movwf aux3
-                      00112 
+000084                00106  Ejercicio_14
+000084 0E11           00107     movlw .17
+000086 6E00           00108     movwf aux1
+000088 0E5A           00109     movlw .90
+00008A 6E01           00110     movwf aux2
+00008C 1800           00111     xorwf aux1,w
+00008E 6E02           00112     movwf aux3
+                      00113 
 Warning[207]: Found label after column 1. (Ejercicio_15)
-00008E                00113  Ejercicio_15
-00008E 0E19           00114     movlw .25
-000090 6E00           00115     movwf aux1
-000092 0E28           00116     movlw .40 
-000094 6E01           00117     movwf aux2
-000096 0E67           00118     movlw .103
-000098 6E02           00119     movwf aux3
-00009A 5002           00120     movf aux3,w
-00009C 0AD0           00121     xorlw 0xD0
-00009E 6E02           00122     movwf aux3
-0000A0 5000           00123     movf aux1,w
-0000A2 1001           00124     iorwf aux2,w
-0000A4 6E00           00125     movwf aux1
-0000A6 1402           00126     andwf aux3,w
-0000A8 6E03           00127     movwf aux4
-                      00128 
+000090                00114  Ejercicio_15
+000090 0E19           00115     movlw .25
+000092 6E00           00116     movwf aux1
+000094 0E28           00117     movlw .40 
+000096 6E01           00118     movwf aux2
+000098 0E67           00119     movlw .103
+00009A 6E02           00120     movwf aux3
+00009C 5002           00121     movf aux3,w
+00009E 0AD0           00122     xorlw 0xD0
+0000A0 6E02           00123     movwf aux3
+0000A2 5000           00124     movf aux1,w
+0000A4 1001           00125     iorwf aux2,w
+0000A6 6E00           00126     movwf aux1
+0000A8 1402           00127     andwf aux3,w
+0000AA 6E03           00128     movwf aux4
+                      00129 
 Warning[207]: Found label after column 1. (Ejercicio_16)
-0000AA                00129  Ejercicio_16
-0000AA 0E12           00130     movlw .18
-0000AC 6E00           00131     movwf aux1
-0000AE 0E3C           00132     movlw .60 
-0000B0 6E01           00133     movwf aux2
-0000B2 0E10           00134     movlw .16
-0000B4 6E02           00135     movwf aux3
-0000B6 0E1A           00136     movlw b'00011010'
-0000B8 5C02           00137     subwf aux3,w
-0000BA 6E02           00138     movwf aux3
-0000BC 5000           00139     movf aux1,w
-0000BE 2401           00140     addwf aux2,w
-0000C0 6E00           00141     movwf aux1
-0000C2 5002           00142     movf aux3,w
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  4
+0000AC                00130  Ejercicio_16
+0000AC 0E12           00131     movlw .18
+0000AE 6E00           00132     movwf aux1
+0000B0 0E3C           00133     movlw .60 
+0000B2 6E01           00134     movwf aux2
+0000B4 0E10           00135     movlw .16
+0000B6 6E02           00136     movwf aux3
+0000B8 0E1A           00137     movlw b'00011010'
+0000BA 5C02           00138     subwf aux3,w
+0000BC 6E02           00139     movwf aux3
+0000BE 5000           00140     movf aux1,w
+0000C0 2401           00141     addwf aux2,w
+0000C2 6E00           00142     movwf aux1
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0000C4 0D03           00143     mullw .3
-0000C6 50F3           00144     movf PRODL,w
-0000C8 6E02           00145     movwf aux3
-0000CA 5002           00146     movf aux3,w
-0000CC 5C00           00147     subwf aux1,w
-0000CE 6E03           00148     movwf aux4
-                      00149     
-0000D0 0E00           00150     movlw .0
-0000D2 5200           00151     movf aux1
-0000D4 5201           00152     movf aux2
-0000D6 5202           00153     movf aux3
-0000D8 5203           00154     movf aux4
-                      00155     
+0000C4 5002           00143     movf aux3,w
+0000C6 0D03           00144     mullw .3
+0000C8 50F3           00145     movf PRODL,w
+0000CA 6E02           00146     movwf aux3
+0000CC 5002           00147     movf aux3,w
+0000CE 5C00           00148     subwf aux1,w
+0000D0 6E03           00149     movwf aux4
+                      00150     
+0000D2 0E00           00151     movlw .0
+0000D4 5200           00152     movf aux1
+0000D6 5201           00153     movf aux2
+0000D8 5202           00154     movf aux3
+0000DA 5203           00155     movf aux4
+                      00156     
 Warning[203]: Found opcode in column 1. (goto)
-0000DA EF00 F000      00156 goto Inicio
+0000DC EF00 F000      00157 goto Inicio
 Warning[205]: Found directive in column 1. (end)
-                      00157 end
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  5
+                      00158 end
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  5
 
 
 SYMBOL TABLE
@@ -257,7 +258,7 @@ BRG16                             00000003
 BRGH                              00000002
 BSR                               00000FE0
 BTOEE                             00000004
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  6
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  6
 
 
 SYMBOL TABLE
@@ -316,7 +317,7 @@ CM2                               00000002
 CMCON                             00000FB4
 CMIE                              00000006
 CMIF                              00000006
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  7
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  7
 
 
 SYMBOL TABLE
@@ -375,7 +376,7 @@ EEIP                              00000004
 EEPGD                             00000007
 ENDP0                             00000003
 ENDP1                             00000004
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  8
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  8
 
 
 SYMBOL TABLE
@@ -389,13 +390,13 @@ EPINEN                            00000001
 EPOUTEN                           00000002
 EPSTALL                           00000000
 Ejercicio_1                       00000000
-Ejercicio_10                      00000056
-Ejercicio_11                      00000062
-Ejercicio_12                      0000006C
-Ejercicio_13                      00000078
-Ejercicio_14                      00000082
-Ejercicio_15                      0000008E
-Ejercicio_16                      000000AA
+Ejercicio_10                      00000058
+Ejercicio_11                      00000064
+Ejercicio_12                      0000006E
+Ejercicio_13                      0000007A
+Ejercicio_14                      00000084
+Ejercicio_15                      00000090
+Ejercicio_16                      000000AC
 Ejercicio_2                       0000000A
 Ejercicio_3                       00000016
 Ejercicio_4                       00000020
@@ -434,7 +435,7 @@ GIE                               00000007
 GIEH                              00000007
 GIEL                              00000006
 GIE_GIEH                          00000007
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE  9
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE  9
 
 
 SYMBOL TABLE
@@ -493,7 +494,7 @@ IOFS                              00000002
 IPEN                              00000007
 IPR1                              00000F9F
 IPR2                              00000FA2
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 10
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 10
 
 
 SYMBOL TABLE
@@ -552,7 +553,7 @@ LVDL1                             00000001
 LVDL2                             00000002
 LVDL3                             00000003
 LVV0                              00000000
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 11
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 11
 
 
 SYMBOL TABLE
@@ -611,7 +612,7 @@ PEIE_GIEL                         00000006
 PEN                               00000002
 PGC                               00000006
 PGD                               00000007
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 12
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 12
 
 
 SYMBOL TABLE
@@ -670,7 +671,7 @@ RB1                               00000001
 RB2                               00000002
 RB3                               00000003
 RB4                               00000004
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 13
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 13
 
 
 SYMBOL TABLE
@@ -729,7 +730,7 @@ S                                 00000003
 SBOREN                            00000006
 SCKP                              00000004
 SCS0                              00000000
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 14
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 14
 
 
 SYMBOL TABLE
@@ -788,7 +789,7 @@ STKPTR0                           00000000
 STKPTR1                           00000001
 STKPTR2                           00000002
 STKPTR3                           00000003
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 15
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 15
 
 
 SYMBOL TABLE
@@ -847,7 +848,7 @@ TMR0IP                            00000002
 TMR0L                             00000FD6
 TMR0ON                            00000007
 TMR1                              00000FCE
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 16
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 16
 
 
 SYMBOL TABLE
@@ -906,7 +907,7 @@ TRISC2                            00000002
 TRISC6                            00000006
 TRISC7                            00000007
 TRISD                             00000F95
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 17
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 17
 
 
 SYMBOL TABLE
@@ -965,7 +966,7 @@ UEP7                              00000F77
 UEP8                              00000F78
 UEP9                              00000F79
 UERRIE                            00000001
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 18
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 18
 
 
 SYMBOL TABLE
@@ -1024,7 +1025,7 @@ _CONFIG2L                         00300002
 _CONFIG3H                         00300005
 _CONFIG4L                         00300006
 _CONFIG5H                         00300009
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 19
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 19
 
 
 SYMBOL TABLE
@@ -1083,7 +1084,7 @@ _ICPRT_OFF_4L                     000000DF
 _ICPRT_ON_4L                      000000FF
 _IDLOC0                           00200000
 _IDLOC1                           00200001
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 20
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 20
 
 
 SYMBOL TABLE
@@ -1142,7 +1143,7 @@ _WDT_ON_2H                        000000FF
 _WRT0_OFF_6L                      000000FF
 _WRT0_ON_6L                       000000FE
 _WRT1_OFF_6L                      000000FF
-MPASM 5.67                 LABORATORIO01.ASM   3-8-2024  14:53:37         PAGE 21
+MPASM 5.67                 LABORATORIO01.ASM   3-13-2024  19:00:51         PAGE 21
 
 
 SYMBOL TABLE
@@ -1175,12 +1176,12 @@ MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXX-- ---------------- ----------------
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Bytes Used:   222
-Program Memory Bytes Free: 32546
+Program Memory Bytes Used:   224
+Program Memory Bytes Free: 32544
 
 
 Errors   :     0
