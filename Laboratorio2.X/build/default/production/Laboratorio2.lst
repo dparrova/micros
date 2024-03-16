@@ -1,4 +1,4 @@
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  1
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -16,27 +16,33 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00008 ;==========================================================================
                       00009 
                       01765         LIST
-                      00003     ;Configuracion
+                      00003 ;Configuracion
                       00004    CONFIG FOSC = EC_EC
                       00005    CONFIG WDT = OFF ; oscilador externo, y WatchDog apagado
-                      00006   ;variables
-                      00007   
-                      00008   ;instrucciones
-000000                00009 Inicio
-                      00010   CODE
-000000 8095           00011   bsf TRISD,0 ;configura como entrada
-000002 8295           00012   bsf TRISD,1 ;configura como una entrada
-000004 8495           00013   bsf TRISD,2 ;
+                      00006    CONFIG LVP = OFF
+                      00007 ;variables
+Warning[207]: Found label after column 1. (aux1)
+  00000000            00008   aux1 equ 0h
+                      00009 ;instrucciones
+000000                00010 Inicio 
+                      00011  code
+000000 9095           00012   bcf TRISD,0 ;configura como salida
+000002 9295           00013   bcf TRISD,1 ;configura como una salida
+000004 9495           00014   bcf TRISD,2 ;
 Warning[207]: Found label after column 1. (Ciclo)
-000006                00014   Ciclo
-000006 908C           00015   bcf LATD,0 
-000008 808C           00016   bsf LATD,0
-                      00017 
+000006                00015   Ciclo
+000006 908C           00016   bcf LATD,0 
+000008 808C           00017   bsf LATD,0
+00000A 928C           00018   bcf LATD,1 
+00000C 828C           00019   bsf LATD,1
+00000E 948C           00020   bcf LATD,2 
+000010 848C           00021   bsf LATD,2
+                      00022 
 Warning[203]: Found opcode in column 1. (goto)
-00000A EF?? F???      00018 goto Ciclo   
+000012 EF?? F???      00023 goto Ciclo   
 Warning[205]: Found directive in column 1. (end)
-                      00019 end
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  2
+                      00024 end
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  2
 
 
 SYMBOL TABLE
@@ -95,7 +101,7 @@ BRG16                             00000003
 BRGH                              00000002
 BSR                               00000FE0
 BTOEE                             00000004
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  3
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  3
 
 
 SYMBOL TABLE
@@ -154,7 +160,7 @@ CM2                               00000002
 CMCON                             00000FB4
 CMIE                              00000006
 CMIF                              00000006
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  4
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  4
 
 
 SYMBOL TABLE
@@ -213,7 +219,7 @@ EEIF                              00000004
 EEIP                              00000004
 EEPGD                             00000007
 ENDP0                             00000003
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  5
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  5
 
 
 SYMBOL TABLE
@@ -272,7 +278,7 @@ HLVDL2                            00000002
 HLVDL3                            00000003
 I2C_DAT                           00000005
 I2C_READ                          00000002
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  6
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  6
 
 
 SYMBOL TABLE
@@ -331,7 +337,7 @@ LATA4                             00000004
 LATA5                             00000005
 LATA6                             00000006
 LATB                              00000F8A
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  7
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  7
 
 
 SYMBOL TABLE
@@ -390,7 +396,7 @@ NOT_RBPU                          00000007
 NOT_RI                            00000004
 NOT_T1SYNC                        00000002
 NOT_T3SYNC                        00000002
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  8
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  8
 
 
 SYMBOL TABLE
@@ -449,7 +455,7 @@ POR                               00000001
 PORTA                             00000F80
 PORTB                             00000F81
 PORTC                             00000F82
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE  9
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE  9
 
 
 SYMBOL TABLE
@@ -508,7 +514,7 @@ RC5                               00000005
 RC6                               00000006
 RC7                               00000007
 RCEN                              00000003
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 10
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 10
 
 
 SYMBOL TABLE
@@ -567,7 +573,7 @@ SPP1                              00000001
 SPP2                              00000002
 SPP3                              00000003
 SPP4                              00000004
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 11
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 11
 
 
 SYMBOL TABLE
@@ -626,7 +632,7 @@ T0IF                              00000002
 T0IP                              00000002
 T0PS0                             00000000
 T0PS1                             00000001
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 12
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 12
 
 
 SYMBOL TABLE
@@ -685,7 +691,7 @@ TMR2ON                            00000002
 TMR3                              00000FB2
 TMR3CS                            00000001
 TMR3H                             00000FB3
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 13
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 13
 
 
 SYMBOL TABLE
@@ -744,7 +750,7 @@ TRISE2                            00000002
 TRMT                              00000001
 TRNIE                             00000003
 TRNIF                             00000003
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 14
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 14
 
 
 SYMBOL TABLE
@@ -803,7 +809,7 @@ USBIE                             00000005
 USBIF                             00000005
 USBIP                             00000005
 USTAT                             00000F6C
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 15
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 15
 
 
 SYMBOL TABLE
@@ -862,7 +868,7 @@ _CP3_OFF_5L                       000000FF
 _CP3_ON_5L                        000000F7
 _CPB_OFF_5H                       000000FF
 _CPB_ON_5H                        000000BF
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 16
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 16
 
 
 SYMBOL TABLE
@@ -921,7 +927,7 @@ _LVP_ON_4L                        000000FF
 _MCLRE_OFF_3H                     0000007F
 _MCLRE_ON_3H                      000000FF
 _PBADEN_OFF_3H                    000000FD
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 17
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 17
 
 
 SYMBOL TABLE
@@ -979,17 +985,16 @@ _WRTD_ON_6H                       0000007F
 _XINST_OFF_4L                     000000BF
 _XINST_ON_4L                      000000FF
 __18F4550                         00000001
-__DEBUG                           
-MPASM 5.67                  LABORATORIO2.ASM   3-13-2024  22:07:56         PAGE 18
+aux1                              00000000
+MPASM 5.67                  LABORATORIO2.ASM   3-15-2024  15:51:50         PAGE 18
 
 
-SYMBOL TABLE
-  LABEL                             VALUE 
 
-__MPLAB_DEBUGGER_SIMULATOR        1
+
+
 
 Errors   :     0
-Warnings :     3 reported,     0 suppressed
+Warnings :     4 reported,     0 suppressed
 Messages :     0 reported,     0 suppressed
 
 
