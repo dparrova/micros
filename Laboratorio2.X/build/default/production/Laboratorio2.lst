@@ -1,4 +1,4 @@
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  1
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -37,27 +37,34 @@ Warning[207]: Found label after column 1. (Ciclo)
                       00019   ;bsf LATD,1
                       00020   ;bcf LATD,2 
                       00021   ;bsf LATD,2
-000006 0E03           00022   movlw b'00000011' ;Azul
-000008 6E8C           00023   movwf LATD 
-00000A 0E01           00024   movlw b'00000001' ;Cyan
-00000C 6E8C           00025   movwf LATD
-00000E 0E05           00026   movlw b'00000101' ;Verde
-000010 6E8C           00027   movwf LATD
-000012 0E04           00028   movlw b'0000100' ;Amarillo
-000014 6E8C           00029   movwf LATD
-000016 0E00           00030   movlw b'00000000' ;Blanco
-000018 6E8C           00031   movwf LATD
-00001A 0E02           00032   movlw b'00000010' ;Magenta
-00001C 6E8C           00033   movwf LATD
-00001E 0E06           00034   movlw b'00000110' ;Rojo
-000020 6E8C           00035   movwf LATD
-000022 0E07           00036   movlw b'0000111' ;Negro
-000024 6E8C           00037   movwf LATD
+                      00022   ;codigo de colores en logica inversa por ser una RGB de anodo común.
+000006 0E03           00023   movlw b'00000011' ;Azul
+000008 6E8C           00024   movwf LATD 
+00000A 0E01           00025   movlw b'00000001' ;Cyan
+00000C 6E8C           00026   movwf LATD
+00000E 0E05           00027   movlw b'00000101' ;Verde
+000010 6E8C           00028   movwf LATD
+000012 0E04           00029   movlw b'0000100' ;Amarillo
+000014 6E8C           00030   movwf LATD
+000016 0E00           00031   movlw b'00000000' ;Blanco
+000018 6E8C           00032   movwf LATD
+00001A 0E02           00033   movlw b'00000010' ;Magenta
+00001C 6E8C           00034   movwf LATD
+00001E 0E06           00035   movlw b'00000110' ;Rojo
+000020 6E8C           00036   movwf LATD
+000022 0E07           00037   movlw b'0000111' ;Negro
+000024 6E8C           00038   movwf LATD
 Warning[203]: Found opcode in column 1. (goto)
-000026 EF?? F???      00038 goto Ciclo   
+000026 EF?? F???      00039 goto Ciclo   
 Warning[205]: Found directive in column 1. (end)
-                      00039 end
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  2
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00040 end
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  3
 
 
 SYMBOL TABLE
@@ -116,7 +123,7 @@ BRG16                             00000003
 BRGH                              00000002
 BSR                               00000FE0
 BTOEE                             00000004
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  3
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  4
 
 
 SYMBOL TABLE
@@ -175,7 +182,7 @@ CM2                               00000002
 CMCON                             00000FB4
 CMIE                              00000006
 CMIF                              00000006
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  4
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  5
 
 
 SYMBOL TABLE
@@ -234,7 +241,7 @@ EEIF                              00000004
 EEIP                              00000004
 EEPGD                             00000007
 ENDP0                             00000003
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  5
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  6
 
 
 SYMBOL TABLE
@@ -293,7 +300,7 @@ HLVDL2                            00000002
 HLVDL3                            00000003
 I2C_DAT                           00000005
 I2C_READ                          00000002
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  6
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  7
 
 
 SYMBOL TABLE
@@ -352,7 +359,7 @@ LATA4                             00000004
 LATA5                             00000005
 LATA6                             00000006
 LATB                              00000F8A
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  7
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  8
 
 
 SYMBOL TABLE
@@ -411,7 +418,7 @@ NOT_RBPU                          00000007
 NOT_RI                            00000004
 NOT_T1SYNC                        00000002
 NOT_T3SYNC                        00000002
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  8
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE  9
 
 
 SYMBOL TABLE
@@ -470,7 +477,7 @@ POR                               00000001
 PORTA                             00000F80
 PORTB                             00000F81
 PORTC                             00000F82
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE  9
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 10
 
 
 SYMBOL TABLE
@@ -529,7 +536,7 @@ RC5                               00000005
 RC6                               00000006
 RC7                               00000007
 RCEN                              00000003
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 10
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 11
 
 
 SYMBOL TABLE
@@ -588,7 +595,7 @@ SPP1                              00000001
 SPP2                              00000002
 SPP3                              00000003
 SPP4                              00000004
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 11
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 12
 
 
 SYMBOL TABLE
@@ -647,7 +654,7 @@ T0IF                              00000002
 T0IP                              00000002
 T0PS0                             00000000
 T0PS1                             00000001
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 12
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 13
 
 
 SYMBOL TABLE
@@ -706,7 +713,7 @@ TMR2ON                            00000002
 TMR3                              00000FB2
 TMR3CS                            00000001
 TMR3H                             00000FB3
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 13
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 14
 
 
 SYMBOL TABLE
@@ -765,7 +772,7 @@ TRISE2                            00000002
 TRMT                              00000001
 TRNIE                             00000003
 TRNIF                             00000003
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 14
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 15
 
 
 SYMBOL TABLE
@@ -824,7 +831,7 @@ USBIE                             00000005
 USBIF                             00000005
 USBIP                             00000005
 USTAT                             00000F6C
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 15
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 16
 
 
 SYMBOL TABLE
@@ -883,7 +890,7 @@ _CP3_OFF_5L                       000000FF
 _CP3_ON_5L                        000000F7
 _CPB_OFF_5H                       000000FF
 _CPB_ON_5H                        000000BF
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 16
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 17
 
 
 SYMBOL TABLE
@@ -942,7 +949,7 @@ _LVP_ON_4L                        000000FF
 _MCLRE_OFF_3H                     0000007F
 _MCLRE_ON_3H                      000000FF
 _PBADEN_OFF_3H                    000000FD
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 17
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 18
 
 
 SYMBOL TABLE
@@ -1001,7 +1008,7 @@ _XINST_OFF_4L                     000000BF
 _XINST_ON_4L                      000000FF
 __18F4550                         00000001
 aux1                              00000000
-MPASM 5.67                  LABORATORIO2.ASM   3-16-2024  23:09:27         PAGE 18
+MPASM 5.67                  LABORATORIO2.ASM   5-24-2024  11:38:53         PAGE 19
 
 
 
