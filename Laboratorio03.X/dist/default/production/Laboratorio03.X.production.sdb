@@ -3,6 +3,8 @@
 [d edition pro ]
 [d chip 18F4550 ]
 [d frameptr 4065 ]
+"7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
 "62 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
 "86 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\ftadd.c
@@ -25,9 +27,9 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\Umul64.c
 [v ___omul __omul `(ul  1 e 4 0 ]
-"10 D:\Archivos\Documentos\DiegoUNAL\Laboratorio03.X\Laboratorio03.c
+"16 D:\Archivos\Documentos\DiegoUNAL\Laboratorio03.X\Laboratorio03.c
 [v _main main `(v  1 e 1 0 ]
-"43
+"53
 [v _ISR ISR `IIH(v  1 e 1 0 ]
 "3263 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
 [v _LATD LATD `VEuc  1 e 1 @3980 ]
@@ -51,6 +53,10 @@
 [v _INT0IE INT0IE `VEb  1 e 0 @32660 ]
 "9832
 [v _INT0IF INT0IF `VEb  1 e 0 @32657 ]
+"9844
+[v _INT1IE INT1IE `VEb  1 e 0 @32643 ]
+"9847
+[v _INT1IF INT1IF `VEb  1 e 0 @32640 ]
 "9877
 [v _INTEDG0 INTEDG0 `VEb  1 e 0 @32654 ]
 "9934
@@ -61,13 +67,32 @@
 [v _TMR0IF TMR0IF `VEb  1 e 0 @32658 ]
 "10825
 [v _TMR0ON TMR0ON `VEb  1 e 0 @32431 ]
-"10 D:\Archivos\Documentos\DiegoUNAL\Laboratorio03.X\Laboratorio03.c
+"9 D:\Archivos\Documentos\DiegoUNAL\Laboratorio03.X\Laboratorio03.c
+[v _colorIndice colorIndice `i  1 e 2 0 ]
+"10
+[v _color color `[6]i  1 e 12 0 ]
+"11
+[v _rojo rojo `i  1 e 2 0 ]
+"12
+[v _parar parar `i  1 e 2 0 ]
+"16
 [v _main main `(v  1 e 1 0 ]
 {
-"41
+"51
 } 0
-"43
+"7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 5 ]
+[v ___awmod@counter counter `uc  1 a 1 4 ]
+"7
+[v ___awmod@dividend dividend `i  1 p 2 0 ]
+[v ___awmod@divisor divisor `i  1 p 2 2 ]
+"34
+} 0
+"53 D:\Archivos\Documentos\DiegoUNAL\Laboratorio03.X\Laboratorio03.c
 [v _ISR ISR `IIH(v  1 e 1 0 ]
 {
-"53
+"71
 } 0
