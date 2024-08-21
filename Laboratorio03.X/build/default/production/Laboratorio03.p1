@@ -12,6 +12,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
 "3375
 [v _LATE `Vuc ~T0 @X0 0 e@3981 ]
+"8069
+[v _T0CON `Vuc ~T0 @X0 0 e@4053 ]
+"8139
+[v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
+"10819
+[v _TMR0IF `Vb ~T0 @X0 0 e@32658 ]
+"10816
+[v _TMR0IE `Vb ~T0 @X0 0 e@32661 ]
+"10825
+[v _TMR0ON `Vb ~T0 @X0 0 e@32431 ]
 "9877
 [v _INTEDG0 `Vb ~T0 @X0 0 e@32654 ]
 "9832
@@ -20,14 +30,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INT0IE `Vb ~T0 @X0 0 e@32660 ]
 "9745
 [v _GIE `Vb ~T0 @X0 0 e@32663 ]
-[v F44 `(v ~T0 @X0 1 tf1`ul ]
-"20 C:\Program Files\Microchip\xc8\v2.46\pic\include\builtins.h
-[v __delay `JF44 ~T0 @X0 0 e ]
-[p i __delay ]
-"9934 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
-[v _LATA1 `Vb ~T0 @X0 0 e@31817 ]
 [t ~ __interrupt . k ]
 [t T42 __interrupt  ]
+"9934
+[v _LATA1 `Vb ~T0 @X0 0 e@31817 ]
 [; ;xc.h: 18: extern const char __xc8_OPTIM_SPEED;
 [; ;xc.h: 20: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3603,83 +3609,106 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Laboratorio03.c: 16: LATE = 0b00000111;
 "16
 [e = _LATE -> -> 7 `i `uc ]
-[; ;Laboratorio03.c: 17: INTEDG0=1;
-"17
-[e = _INTEDG0 -> -> 1 `i `b ]
-[; ;Laboratorio03.c: 18: INT0IF=0;
+[; ;Laboratorio03.c: 18: T0CON= 0b00000001;
 "18
-[e = _INT0IF -> -> 0 `i `b ]
-[; ;Laboratorio03.c: 19: INT0IE=1;
+[e = _T0CON -> -> 1 `i `uc ]
+[; ;Laboratorio03.c: 19: TMR0=3036;
 "19
-[e = _INT0IE -> -> 1 `i `b ]
-[; ;Laboratorio03.c: 20: GIE=1;
+[e = _TMR0 -> -> 3036 `i `us ]
+[; ;Laboratorio03.c: 20: TMR0IF=0;
 "20
-[e = _GIE -> -> 1 `i `b ]
-[; ;Laboratorio03.c: 21: while(1){
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;Laboratorio03.c: 21: TMR0IE=1;
 "21
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;Laboratorio03.c: 22: TMR0ON=1;
+"22
+[e = _TMR0ON -> -> 1 `i `b ]
+[; ;Laboratorio03.c: 24: INTEDG0=1;
+"24
+[e = _INTEDG0 -> -> 1 `i `b ]
+[; ;Laboratorio03.c: 25: INT0IF=0;
+"25
+[e = _INT0IF -> -> 0 `i `b ]
+[; ;Laboratorio03.c: 26: INT0IE=1;
+"26
+[e = _INT0IE -> -> 1 `i `b ]
+[; ;Laboratorio03.c: 28: GIE=1;
+"28
+[e = _GIE -> -> 1 `i `b ]
+[; ;Laboratorio03.c: 29: while(1){
+"29
 [e :U 364 ]
 {
-[; ;Laboratorio03.c: 22: LATD++;
-"22
-[e ++ _LATD -> -> 1 `i `uc ]
-[; ;Laboratorio03.c: 23: if(LATD==0b00001010)
-"23
+[; ;Laboratorio03.c: 31: if(LATD==0b00001010)
+"31
 [e $ ! == -> _LATD `i -> 10 `i 366  ]
-[; ;Laboratorio03.c: 24: {
-"24
+[; ;Laboratorio03.c: 32: {
+"32
 {
-[; ;Laboratorio03.c: 25: LATD=0;
-"25
+[; ;Laboratorio03.c: 33: LATD=0;
+"33
 [e = _LATD -> -> 0 `i `uc ]
-[; ;Laboratorio03.c: 26: LATE--;
-"26
+[; ;Laboratorio03.c: 34: LATE--;
+"34
 [e -- _LATE -> -> 1 `i `uc ]
-"28
+"35
 }
 [e :U 366 ]
-[; ;Laboratorio03.c: 28: }
-[; ;Laboratorio03.c: 29: _delay((unsigned long)((1000)*(1000000/4000.0)));
-"29
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
-[; ;Laboratorio03.c: 30: LATA1=!LATA1;
-"30
-[e = _LATA1 ! _LATA1 ]
-"32
+"39
 }
 [e :U 363 ]
-"21
+"29
 [e $U 364  ]
 [e :U 365 ]
-[; ;Laboratorio03.c: 32: }
-[; ;Laboratorio03.c: 33: return;
-"33
+[; ;Laboratorio03.c: 35: }
+[; ;Laboratorio03.c: 39: }
+[; ;Laboratorio03.c: 40: return;
+"40
 [e $UE 362  ]
-[; ;Laboratorio03.c: 34: }
-"34
+[; ;Laboratorio03.c: 41: }
+"41
 [e :UE 362 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-"36
+"43
 [v _ISR `(v ~T42 @X0 1 ef ]
 {
-[; ;Laboratorio03.c: 36: void __interrupt() ISR(void){
+[; ;Laboratorio03.c: 43: void __interrupt() ISR(void){
 [e :U _ISR ]
 [f ]
-[; ;Laboratorio03.c: 38: if(INT0IF==1){
-"38
-[e $ ! == -> _INT0IF `i -> 1 `i 368  ]
+[; ;Laboratorio03.c: 44: if(TMR0IF==1){
+"44
+[e $ ! == -> _TMR0IF `i -> 1 `i 368  ]
 {
-[; ;Laboratorio03.c: 39: INT0IF=0;
-"39
-[e = _INT0IF -> -> 0 `i `b ]
-[; ;Laboratorio03.c: 40: LATD++;
-"40
-[e ++ _LATD -> -> 1 `i `uc ]
-"41
+[; ;Laboratorio03.c: 45: TMR0=3036;
+"45
+[e = _TMR0 -> -> 3036 `i `us ]
+[; ;Laboratorio03.c: 46: TMR0IF=0;
+"46
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;Laboratorio03.c: 47: LATA1=!LATA1;
+"47
+[e = _LATA1 ! _LATA1 ]
+"48
 }
 [e :U 368 ]
-[; ;Laboratorio03.c: 41: }
-[; ;Laboratorio03.c: 42: }
-"42
+[; ;Laboratorio03.c: 48: }
+[; ;Laboratorio03.c: 49: if(INT0IF==1){
+"49
+[e $ ! == -> _INT0IF `i -> 1 `i 369  ]
+{
+[; ;Laboratorio03.c: 50: INT0IF=0;
+"50
+[e = _INT0IF -> -> 0 `i `b ]
+[; ;Laboratorio03.c: 51: LATD++;
+"51
+[e ++ _LATD -> -> 1 `i `uc ]
+"52
+}
+[e :U 369 ]
+[; ;Laboratorio03.c: 52: }
+[; ;Laboratorio03.c: 53: }
+"53
 [e :UE 367 ]
 }
