@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
-                                                                                               Wed Aug 21 11:25:25 2024
+                                                                                               Wed Aug 21 20:19:51 2024
 
 Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og9 
      1                           	processor	18F4550
@@ -354,7 +354,7 @@ Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og9
    340                           
    341 ;; *************** function ___awmod *****************
    342 ;; Defined at:
-   343 ;;		line 7 in file "C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\awmod.c"
+   343 ;;		line 7 in file "/Applications/microchip/xc8/v2.46/pic/sources/c90/common/awmod.c"
    344 ;; Parameters:    Size  Location     Type
    345 ;;  dividend        2    0[COMRAM] int 
    346 ;;  divisor         2    2[COMRAM] int 
@@ -978,7 +978,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
-Symbol Table                                                                                   Wed Aug 21 11:25:25 2024
+Symbol Table                                                                                   Wed Aug 21 20:19:51 2024
 
                     l921 08BC                      l913 08A2                      l923 08C4  
                     l933 08E6                      l917 08AE                      l937 08F4  

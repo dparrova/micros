@@ -228,8 +228,8 @@ smallconst 800 801 SMALLCONST 800 0
 dataCOMRAM 1 1B COMRAM 1 1
 text0 802 989 CODE 802 0
 %locals
-dist/default/production\Laboratorio03.X.production.obj
-C:\Users\Tomate\AppData\Local\Temp\xcAscug.\driver_tmp_1.as
+dist/default/production/Laboratorio03.X.production.obj
+/tmp/xcyHnsHle/driver_tmp_1.as
 529 94C 0 CODE 0
 531 94C 0 CODE 0
 534 94C 0 CODE 0
@@ -280,7 +280,7 @@ Laboratorio03.c
 45 86C 0 CODE 0
 46 874 0 CODE 0
 47 88A 0 CODE 0
-C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\awmod.c
+/Applications/microchip/xc8/v2.46/pic/sources/c90/common/awmod.c
 7 88E 0 CODE 0
 12 88E 0 CODE 0
 13 892 0 CODE 0
@@ -302,7 +302,7 @@ C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\awmod.c
 32 8EC 0 CODE 0
 33 8F4 0 CODE 0
 34 8FC 0 CODE 0
-C:\Users\Tomate\AppData\Local\Temp\xcAscug.\driver_tmp_1.as
+/tmp/xcyHnsHle/driver_tmp_1.as
 1230 8 0 CODE 0
 Laboratorio03.c
 53 8 0 CODE 0

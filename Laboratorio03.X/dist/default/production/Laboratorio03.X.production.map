@@ -2,20 +2,19 @@ Microchip MPLAB XC8 Compiler V2.46
 
 Linker command line:
 
--W-3 \
-  --edf=C:\Program Files\Microchip\xc8\v2.46\pic\dat\20240104201356_en.msgs \
-  -cn -h+dist/default/production\Laboratorio03.X.production.sym \
-  --cmf=dist/default/production\Laboratorio03.X.production.cmf -z -Q18F4550 \
-  -oC:\Users\Tomate\AppData\Local\Temp\xcAscug.\driver_tmp_3.obj \
+-W-3 --edf=/Applications/microchip/xc8/v2.46/pic/dat/20240104201356_en.msgs \
+  -cn -h+dist/default/production/Laboratorio03.X.production.sym \
+  --cmf=dist/default/production/Laboratorio03.X.production.cmf -z -Q18F4550 \
+  -o/tmp/xcyHnsHle/driver_tmp_3.obj \
   -Mdist/default/production/Laboratorio03.X.production.map \
-  --md=C:\Users\Tomate\AppData\Local\Temp\xcAscug.\driver_tmp_0.dat -E1 \
-  -ver=XC8 Compiler -ACODE=00h-07FFFh -ACONST=00h-07FFFh \
-  -ASMALLCONST=0800h-08FFhx120 -AMEDIUMCONST=0800h-07FFFh -ACOMRAM=01h-05Fh \
-  -AABS1=00h-07FFh -ABIGRAM=01h-07FFh -ARAM=060h-0FFh,0100h-01FFhx7 \
-  -ABANK0=060h-0FFh -ABANK1=0100h-01FFh -ABANK2=0200h-02FFh \
-  -ABANK3=0300h-03FFh -ABANK4=0400h-04FFh -ABANK5=0500h-05FFh \
-  -ABANK6=0600h-06FFh -ABANK7=0700h-07FFh -ASFR=0F60h-0FFFh \
-  -ABIGSFR=0F60h-0FFFh -ACONFIG=0300000h-030000Dh -AIDLOC=0200000h-0200007h \
+  --md=/tmp/xcyHnsHle/driver_tmp_0.dat -E1 -ver=XC8 Compiler \
+  -ACODE=00h-07FFFh -ACONST=00h-07FFFh -ASMALLCONST=0800h-08FFhx120 \
+  -AMEDIUMCONST=0800h-07FFFh -ACOMRAM=01h-05Fh -AABS1=00h-07FFh \
+  -ABIGRAM=01h-07FFh -ARAM=060h-0FFh,0100h-01FFhx7 -ABANK0=060h-0FFh \
+  -ABANK1=0100h-01FFh -ABANK2=0200h-02FFh -ABANK3=0300h-03FFh \
+  -ABANK4=0400h-04FFh -ABANK5=0500h-05FFh -ABANK6=0600h-06FFh \
+  -ABANK7=0700h-07FFh -ASFR=0F60h-0FFFh -ABIGSFR=0F60h-0FFFh \
+  -ACONFIG=0300000h-030000Dh -AIDLOC=0200000h-0200007h \
   -AEEDATA=0F00000h-0F000FFh -peeprom_data=EEDATA \
   -preset_vec=00h,intcode=8h,intcodelo,powerup,init -pramtop=0800h \
   -psmallconst=SMALLCONST -pmediumconst=MEDIUMCONST -pconst=CONST \
@@ -24,8 +23,8 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Tomate\AppData\Local\Temp\xcAscug.\driver_tmp_9.obj \
-  dist/default/production\Laboratorio03.X.production.obj 
+  /tmp/xcyHnsHle/driver_tmp_9.obj \
+  dist/default/production/Laboratorio03.X.production.obj 
 
 Object code version is 3.11
 
@@ -34,12 +33,12 @@ Machine type is 18F4550
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Tomate\AppData\Local\Temp\xcAscug.\driver_tmp_9.obj
+/tmp/xcyHnsHle/driver_tmp_9.obj
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
                 init                                  E        E        4        4       0
                 reset_vec                             0        0        4        0       0
-dist/default/production\Laboratorio03.X.production.obj
+dist/default/production/Laboratorio03.X.production.obj
                 intcode                               8        8        6        4       0
                 idloc                            200000   200000        8        0       5
                 config                           300000   300000        E        0       4
@@ -123,10 +122,10 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
+                text0                          000802  000188  00098A       401       0  CODE    
                 dataCOMRAM                     000001  00001B  00001C         1       1  COMRAM  
                 intcode                        000008  00000A  000012         4       0  CODE    
                 smallconst                     000800  000002  000802       400       0  SMALLCON
-                text0                          000802  000188  00098A       401       0  CODE    
 
 
 UNUSED ADDRESS RANGES
@@ -391,13 +390,13 @@ Laboratorio03.c
 
 Laboratorio03.c estimated size: 224
 
+/Applications/microchip/xc8/v2.46/pic/sources/c90/common/awmod.c
+		___awmod       		CODE           	088E	0000	112
+
+/Applications/microchip/xc8/v2.46/pic/sources/c90/common/awmod.c estimated size: 112
+
 shared
 		__initialization		CODE           	094C	0000	36
 
 shared estimated size: 36
-
-C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\awmod.c
-		___awmod       		CODE           	088E	0000	112
-
-C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\awmod.c estimated size: 112
 

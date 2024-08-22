@@ -1,6 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"4223 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
+"4223 /Applications/microchip/xc8/v2.46/pic/include/proc/pic18f4550.h
 [v _TRISE `Vuc ~T0 @X0 0 e@3990 ]
 "4001
 [v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
@@ -35,12 +35,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "9745
 [v _GIE `Vb ~T0 @X0 0 e@32663 ]
 [v F44 `(v ~T0 @X0 1 tf1`ul ]
-"20 C:\Program Files\Microchip\xc8\v2.46\pic\include\builtins.h
+"20 /Applications/microchip/xc8/v2.46/pic/include/builtins.h
 [v __delay `JF44 ~T0 @X0 0 e ]
 [p i __delay ]
 [t ~ __interrupt . k ]
 [t T42 __interrupt  ]
-"9934 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
+"9934 /Applications/microchip/xc8/v2.46/pic/include/proc/pic18f4550.h
 [v _LATA1 `Vb ~T0 @X0 0 e@31817 ]
 [; ;xc.h: 18: extern const char __xc8_OPTIM_SPEED;
 [; ;xc.h: 20: extern double __fpnormalize(double);
@@ -81,7 +81,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;builtins.h: 22: extern __nonreentrant void _delaywdt(uint32_t);
 [; ;builtins.h: 25: extern __nonreentrant void _delay3(uint8_t);
 [; ;pic18f4550.h: 52: extern volatile unsigned char SPPDATA __at(0xF62);
-"54 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
+"54 /Applications/microchip/xc8/v2.46/pic/include/proc/pic18f4550.h
 [; ;pic18f4550.h: 54: asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
 [; ;pic18f4550.h: 57: typedef union {
