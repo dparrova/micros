@@ -5670,42 +5670,74 @@ unsigned char __t3rd16on(void);
 
 # 3 "Laboratorio03.c"
 #pragma config WDT = OFF
-#pragma config FOSC = INTOSC_EC
+#pragma config FOSC = HS
 #pragma config LVP = OFF
 #pragma config PBADEN = OFF
+
+
+int colorIndice = 0;
+int color[] = {2 , 6 , 4 , 5 , 1 , 0};
+int rojo = 3;
+int parar = 1;
 
 void __interrupt() ISR(void);
 
 void main(void) {
-TRISE=0;
-TRISD=0;
-TRISA=0;
-TRISB=1;
+TRISE = 0;
+TRISD = 0;
+TRISA = 0;
+TRISB = 1;
 LATD = 0b00000000;
 LATE = 0b00000111;
-INTEDG0=1;
-INT0IF=0;
-INT0IE=1;
-GIE=1;
-while(1){
+
+T0CON = 0b10000011;
+TMR0 = 3036;
+TMR0IF = 0;
+TMR0IE = 1;
+
+
+INTEDG0 = 1;
+INT0IF = 0;
+INT0IE = 1;
+
+INTEDG1 = 1;
+INT1IF = 0;
+INT1IE = 1;
+
+GIE = 1;
+while (1) {
+
+if (LATD == 0b00001010) {
+LATD = 0;
+LATE=color[colorIndice%6];
+colorIndice++;
+}
+_delay((unsigned long)((1000)*(4000000/4000.0)));
+if(parar){
 LATD++;
-if(LATD==0b00001010)
-{
-LATD=0;
-LATE--;
+
 
 }
-_delay((unsigned long)((1000)*(1000000/4000.0)));
-LATA1=!LATA1;
-
 }
 return;
 }
 
-void __interrupt() ISR(void){
-
-if(INT0IF==1){
-INT0IF=0;
-LATD++;
+void __interrupt() ISR(void) {
+if (TMR0IF == 1) {
+TMR0 = 3036;
+TMR0IF = 0;
+LATA1 = !LATA1;
+}
+if (INT0IF == 1) {
+INT0IF = 0;
+if(parar){
+LATD = 0;
+LATE = 0b00000111;
+colorIndice = 0;}
+}
+if (INT1IF == 1) {
+INT1IF = 0;
+LATE = rojo;
+parar = 0;
 }
 }

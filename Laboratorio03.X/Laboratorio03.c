@@ -1,7 +1,7 @@
 #include <xc.h>
-#define _XTAL_FREQ 1000000
+#define _XTAL_FREQ 4000000
 #pragma config WDT = OFF
-#pragma config FOSC = INTOSC_EC
+#pragma config FOSC = HS
 #pragma config LVP = OFF
 #pragma config PBADEN = OFF
 
@@ -21,16 +21,17 @@ void main(void) {
     LATD = 0b00000000; // DISPLAY  SEGMENTS
     LATE = 0b00000111; //LED RGB
 
-    T0CON = 0b00000001; //inicio USO DE TMR0
+    T0CON = 0b10000011; //inicio USO DE TMR0
     TMR0 = 3036;
     TMR0IF = 0;
     TMR0IE = 1;
-    TMR0ON = 1; // fin TMR0
+    //TMR0ON = 1; // fin TMR0
 
     INTEDG0 = 1; //Inicio configuración pulsador
     INT0IF = 0;
     INT0IE = 1; // fin pulsador
     
+    INTEDG1 = 1;
     INT1IF = 0; // Inicio configuración interruptor
     INT1IE = 1; // fin interruptor
 
@@ -42,9 +43,11 @@ void main(void) {
             LATE=color[colorIndice%6];
             colorIndice++;
         }   
-            if(parar){
             __delay_ms(1000);
+            if(parar){
             LATD++;
+            
+            
             }
     }
     return;
