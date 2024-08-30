@@ -1,36 +1,56 @@
-#include <xc.h>
-#define _XTAL_FREQ 48000000
+/* File: I2C_LCD.h */
 
-#define USE_CGRAM_LCD
+#define _XTAL_FREQ             4000000
 
-#define RS LATDbits.LD2
-#define EN LATDbits.LD3
-#define D4 LATDbits.LD4
-#define D5 LATDbits.LD5
-#define D6 LATDbits.LD6
-#define D7 LATDbits.LD7
+#define I2C_BaudRate           100000
+#define SCL_D                  TRISB1
+#define SDA_D                  TRISB0
 
-#define RS_DIR TRISDbits.TRISD2
-#define EN_DIR TRISDbits.TRISD3
-#define D4_DIR TRISDbits.TRISD4
-#define D5_DIR TRISDbits.TRISD5
-#define D6_DIR TRISDbits.TRISD6
-#define D7_DIR TRISDbits.TRISD7
+#define LCD_BACKLIGHT          0x08
+#define LCD_NOBACKLIGHT        0x00
+#define LCD_FIRST_ROW          0x80
+#define LCD_SECOND_ROW         0xC0
+#define LCD_THIRD_ROW          0x94
+#define LCD_FOURTH_ROW         0xD4
+#define LCD_CLEAR              0x01
+#define LCD_RETURN_HOME        0x02
+#define LCD_ENTRY_MODE_SET     0x04
+#define LCD_CURSOR_OFF         0x0C
+#define LCD_UNDERLINE_ON       0x0E
+#define LCD_BLINK_CURSOR_ON    0x0F
+#define LCD_MOVE_CURSOR_LEFT   0x10
+#define LCD_MOVE_CURSOR_RIGHT  0x14
+#define LCD_TURN_ON            0x0C
+#define LCD_TURN_OFF           0x08
+#define LCD_SHIFT_LEFT         0x18
+#define LCD_SHIFT_RIGHT        0x1E
+#define LCD_TYPE               2       // 0 -> 5x7 | 1 -> 5x10 | 2 -> 2 lines
 
-void Lcd_Port(char a);
-void Lcd_Cmd(char a);
-void Lcd_Clear(void);
-void Lcd_Set_Cursor(char a, char b);
-void Lcd_Init(void);
-void Lcd_Write_Char(char a);
-void Lcd_Write_String(const char *a);
-void Lcd_Shift_Right(void);
-void Lcd_Shift_Left(void);
-void Lcd_Blink(void);
-void Lcd_NoBlink(void);
+//-----------[ Functions' Prototypes ]--------------
 
-#ifdef USE_CGRAM_LCD
-void Lcd_CGRAM_CreateChar(char add, const char* chardata);
-void Lcd_CGRAM_Init(void);
-void Lcd_CGRAM_Close(void);
-#endif
+//---[ I2C Routines ]---
+
+void I2C_Master_Init();
+void I2C_Master_Wait();
+void I2C_Master_Start();
+void I2C_Master_RepeatedStart();
+void I2C_Master_Stop();
+void I2C_ACK();
+void I2C_NACK();
+unsigned char I2C_Master_Write(unsigned char data);
+unsigned char I2C_Read_Byte(void);
+
+//---[ LCD Routines ]---
+
+void LCD_Init(unsigned char I2C_Add);
+void IO_Expander_Write(unsigned char Data);
+void LCD_Write_4Bit(unsigned char Nibble);
+void LCD_CMD(unsigned char CMD);
+void LCD_Set_Cursor(unsigned char ROW, unsigned char COL);
+void LCD_Write_Char(char);
+void LCD_Write_String(char*);
+void Backlight();
+void noBacklight();
+void LCD_SR();
+void LCD_SL();
+void LCD_Clear();

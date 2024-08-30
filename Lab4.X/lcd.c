@@ -1,186 +1,186 @@
+#include <xc.h>
 #include "lcd.h"
 
-void Lcd_Port(char a)
+unsigned char RS, i2c_add, BackLight_State = LCD_BACKLIGHT;
+
+//---------------[ I2C Routines ]-------------------
+//--------------------------------------------------
+void I2C_Master_Init()
 {
-    (a & 1) ? (D4 = 1) : (D4 = 0);
-    (a & 2) ? (D5 = 1) : (D5 = 0);
-    (a & 4) ? (D6 = 1) : (D6 = 0);
-    (a & 8) ? (D7 = 1) : (D7 = 0);
+  SSPCON1 = 0x27; //if i make this line 0x28 it works on proteus simulations.
+  SSPCON2 = 0x00;
+  SSPSTAT = 0x00;
+  SSPADD = ((_XTAL_FREQ/4)/I2C_BaudRate) - 1;
+  SCL_D = 1;
+  SDA_D = 1;
 }
 
-void Lcd_Cmd(char a)
+void I2C_Master_Wait()
 {
-    RS = 0;
-    Lcd_Port(a);
-    EN = 1;
-    __delay_ms(4);
-    EN = 0;
+    while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
 }
 
-void Lcd_Clear(void)
+void I2C_Master_Start()
 {
-    Lcd_Cmd(0);
-    Lcd_Cmd(1);
+    I2C_Master_Wait();
+    SEN = 1;
 }
 
-void Lcd_Set_Cursor(char a, char b)
+void I2C_Master_RepeatedStart()
 {
-    char temp,z,y;
-    if(a == 1)
-    {
-        temp = 0x80 + b - 1;
-        z = temp>>4;
-        y = temp & 0x0F;
-        Lcd_Cmd(z);
-        Lcd_Cmd(y);
-    }
-    else if(a == 2)
-    {
-        temp = 0xC0 + b - 1;
-        z = temp>>4;
-        y = temp & 0x0F;
-        Lcd_Cmd(z);
-        Lcd_Cmd(y);
-    }
-    else if(a == 3)
-    {
-        temp = 0x94 + b - 1;
-        z = temp>>4;
-        y = temp & 0x0F;
-        Lcd_Cmd(z);
-        Lcd_Cmd(y);
-    }
-    else if(a == 4)
-    {
-        temp = 0xD4 + b - 1;
-        z = temp>>4;
-        y = temp & 0x0F;
-        Lcd_Cmd(z);
-        Lcd_Cmd(y);
-    }
+    I2C_Master_Wait();
+    RSEN = 1;
 }
 
-void Lcd_Init(void)
+void I2C_Master_Stop()
 {
-	RS_DIR = 0;
-	EN_DIR = 0;
-	D4_DIR = 0;
-	D5_DIR = 0;
-	D6_DIR = 0;
-	D7_DIR = 0;
-    Lcd_Port(0x00);
-    __delay_ms(20);
-    Lcd_Cmd(0x03);
-    __delay_ms(5);
-    Lcd_Cmd(0x03);
-    __delay_ms(11);
-    Lcd_Cmd(0x03);
-    Lcd_Cmd(0x02);
-    Lcd_Cmd(0x02);
-    Lcd_Cmd(0x08);
-    Lcd_Cmd(0x00);
-    Lcd_Cmd(0x0C);
-    Lcd_Cmd(0x00);
-    Lcd_Cmd(0x06);
-    Lcd_Clear();
+    I2C_Master_Wait();
+    PEN = 1;
 }
 
-void Lcd_Write_Char(char a)
+void I2C_ACK(void)
 {
-    char temp,y;
-    temp = a&0x0F;
-    y = a&0xF0;
-    RS = 1;
-    Lcd_Port(y>>4);
-    EN = 1;
-    __delay_us(40);
-    EN = 0;
-    Lcd_Port(temp);
-    EN = 1;
-    __delay_us(40);
-    EN = 0;
+    ACKDT = 0;            // 0 -> ACK
+    I2C_Master_Wait();
+    ACKEN = 1;            // Send ACK
 }
 
-void Lcd_Write_String(const char *a)
+void I2C_NACK(void)
 {
-    int i;
-    for(i=0;a[i]!='\0';i++)
-        Lcd_Write_Char(a[i]);
+    ACKDT = 1;            // 1 -> NACK
+    I2C_Master_Wait();
+    ACKEN = 1;            // Send NACK
 }
 
-void Lcd_Shift_Right(void)
+unsigned char I2C_Master_Write(unsigned char data)
 {
-    Lcd_Cmd(0x01);
-    Lcd_Cmd(0x0C);
+    I2C_Master_Wait();
+    SSPBUF = data;
+    while(!SSPIF);  // Wait Until Completion
+    SSPIF = 0;
+    return ACKSTAT;
 }
 
-void Lcd_Shift_Left(void)
+unsigned char I2C_Read_Byte(void)
 {
-    Lcd_Cmd(0x01);
-    Lcd_Cmd(0x08);
+    //---[ Receive & Return A Byte ]---
+    I2C_Master_Wait();
+    RCEN = 1;          // Enable & Start Reception
+    while(!SSPIF);      // Wait Until Completion
+    SSPIF = 0;          // Clear The Interrupt Flag Bit
+    I2C_Master_Wait();
+    return SSPBUF;      // Return The Received Byte
+}
+//======================================================
+
+//---------------[ LCD Routines ]----------------
+//------------------------------------------------------
+
+void LCD_Init(unsigned char I2C_Add)
+{
+  i2c_add = I2C_Add;
+  IO_Expander_Write(0x00);
+  __delay_ms(30);
+  LCD_CMD(0x03);
+  __delay_ms(5);
+  LCD_CMD(0x03);
+  __delay_ms(5);
+  LCD_CMD(0x03);
+  __delay_ms(5);
+  LCD_CMD(LCD_RETURN_HOME);
+  __delay_ms(5);
+  LCD_CMD(0x20 | (LCD_TYPE << 2));
+  __delay_ms(50);
+  LCD_CMD(LCD_TURN_ON);
+  __delay_ms(50);
+  LCD_CMD(LCD_CLEAR);
+  __delay_ms(50);
+  LCD_CMD(LCD_ENTRY_MODE_SET | LCD_RETURN_HOME);
+  __delay_ms(50);
 }
 
-void Lcd_Blink(void)
+void IO_Expander_Write(unsigned char Data)
 {
-    Lcd_Cmd(0x00);
-    Lcd_Cmd(0x0F);
+  I2C_Master_Start();
+  I2C_Master_Write(i2c_add);
+  I2C_Master_Write(Data | BackLight_State);
+  I2C_Master_Stop();
 }
 
-void Lcd_NoBlink(void)
+void LCD_Write_4Bit(unsigned char Nibble)
 {
-    Lcd_Cmd(0x00);
-    Lcd_Cmd(0x0C);
+  // Get The RS Value To LSB OF Data  
+  Nibble |= RS;
+  IO_Expander_Write(Nibble | 0x04);
+  IO_Expander_Write(Nibble & 0xFB);
+  __delay_us(50);
 }
 
-#ifdef USE_CGRAM_LCD
-void Lcd_CGRAM_CreateChar(char add, const char* chardata)
+void LCD_CMD(unsigned char CMD)
 {
-    switch(add)
-    {
-        case 0:
-            for(char i=0; i<=7; i++)
-                Lcd_Write_Char(chardata[i]);
-            break;
-        case 1:
-            for(char i=8; i<=15; i++)
-                Lcd_Write_Char(chardata[i-8]);
-            break;
-        case 2:
-            for(char i=16; i<=23; i++)
-                Lcd_Write_Char(chardata[i-16]);
-            break;
-        case 3:
-            for(char i=24; i<=31; i++)
-                Lcd_Write_Char(chardata[i-24]);
-            break;
-        case 4:
-            for(char i=32; i<=39; i++)
-                Lcd_Write_Char(chardata[i-32]);
-            break;
-        case 5:
-            for(char i=40; i<=47; i++)
-                Lcd_Write_Char(chardata[i-40]);
-            break;
-        case 6:
-            for(char i=48; i<=55; i++)
-                Lcd_Write_Char(chardata[i-48]);
-            break;
-        case 7:
-            for(char i=56; i<=63; i++)
-                Lcd_Write_Char(chardata[i-56]);
-            break;
-    }
+  RS = 0; // Command Register Select
+  LCD_Write_4Bit(CMD & 0xF0);
+  LCD_Write_4Bit((CMD << 4) & 0xF0);
 }
 
-void Lcd_CGRAM_Init(void)
+void LCD_Write_Char(char Data)
 {
-    Lcd_Cmd(0x04);
-    Lcd_Cmd(0x00);
+  RS = 1;  // Data Register Select
+  LCD_Write_4Bit(Data & 0xF0);
+  LCD_Write_4Bit((Data << 4) & 0xF0);
 }
 
-void Lcd_CGRAM_Close(void)
+void LCD_Write_String(char* Str)
 {
-    Lcd_Cmd(0x00);
-    Lcd_Cmd(0x02);
+    for(int i=0; Str[i]!='\0'; i++)
+       LCD_Write_Char(Str[i]);
 }
-#endif
+
+void LCD_Set_Cursor(unsigned char ROW, unsigned char COL)
+{    
+  switch(ROW)
+  {
+    case 2:
+      LCD_CMD(0xC0 + COL-1);
+      break;
+    case 3:
+      LCD_CMD(0x94 + COL-1);
+      break;
+    case 4:
+      LCD_CMD(0xD4 + COL-1);
+      break;
+    // Case 1  
+    default:
+      LCD_CMD(0x80 + COL-1);
+  }
+}
+
+void Backlight()
+{
+  BackLight_State = LCD_BACKLIGHT;
+  IO_Expander_Write(0);
+}
+
+void noBacklight()
+{
+  BackLight_State = LCD_NOBACKLIGHT;
+  IO_Expander_Write(0);
+}
+
+void LCD_SL()
+{
+  LCD_CMD(0x18);
+  __delay_us(40);
+}
+
+void LCD_SR()
+{
+  LCD_CMD(0x1C);
+  __delay_us(40);
+}
+
+void LCD_Clear()
+{
+  LCD_CMD(0x01);
+  __delay_us(40);
+}
