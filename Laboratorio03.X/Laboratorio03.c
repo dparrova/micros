@@ -7,7 +7,7 @@
 
 
 int colorIndice = 0;
-int color[] = {2 , 6 , 4 , 5 , 1 , 0}; //magenta, azul, cyan, verde, amarillo y blanco
+int color[] = {2, 6, 4, 5, 1, 0}; //magenta, azul, cyan, verde, amarillo y blanco
 int rojo = 3;
 int parar = 1; //logica negativa
 
@@ -30,25 +30,20 @@ void main(void) {
     INTEDG0 = 1; //Inicio configuración pulsador
     INT0IF = 0;
     INT0IE = 1; // fin pulsador
-    
+
     INTEDG1 = 1;
     INT1IF = 0; // Inicio configuración interruptor
     INT1IE = 1; // fin interruptor
 
+    INTEDG2 = 1;
+    INT2IF = 0; // Inicio configuración interruptor
+    INT2IE = 1; // fin interruptor
+
+
     GIE = 1;
-     while (1) {
-            
-            if (LATD == 0b00001010) {
-            LATD = 0;
-            LATE=color[colorIndice%6];
-            colorIndice++;
-        }   
-            __delay_ms(1000);
-            if(parar){
-            LATD++;
-            
-            
-            }
+
+    while (1) {
+
     }
     return;
 }
@@ -60,15 +55,28 @@ void __interrupt() ISR(void) {
         LATA1 = !LATA1; //toggle!
     }
     if (INT0IF == 1) {
-       INT0IF = 0;
-       if(parar){
-       LATD = 0;
-       LATE = 0b00000111;
-       colorIndice = 0;}
+        INT0IF = 0;
+        if (parar) {
+            LATD++;
+
+            if (LATD == 0b00001010) {
+                LATD = 0;
+                colorIndice++;
+            }
+            LATE = color[colorIndice % 6];
+        }
     }
     if (INT1IF == 1) {
-       INT1IF = 0;
-       LATE = rojo;
-       parar = 0;
+        INT1IF = 0;
+        if (parar) {
+            LATD = 0;
+            LATE = 0b00000111;
+            colorIndice = 0;
+        }
+    }
+    if (INT2IF == 1) {
+        INT2IF = 0;
+        LATE = rojo;
+        parar = 0;
     }
 }

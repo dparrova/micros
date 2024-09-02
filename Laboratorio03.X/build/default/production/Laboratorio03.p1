@@ -1,6 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"4223 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
+"4223 /Applications/microchip/xc8/v2.46/pic/include/proc/pic18f4550.h
 [v _TRISE `Vuc ~T0 @X0 0 e@3990 ]
 "4001
 [v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
@@ -32,15 +32,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INT1IF `Vb ~T0 @X0 0 e@32640 ]
 "9844
 [v _INT1IE `Vb ~T0 @X0 0 e@32643 ]
+"9883
+[v _INTEDG2 `Vb ~T0 @X0 0 e@32652 ]
+"9868
+[v _INT2IF `Vb ~T0 @X0 0 e@32641 ]
+"9865
+[v _INT2IE `Vb ~T0 @X0 0 e@32644 ]
 "9745
 [v _GIE `Vb ~T0 @X0 0 e@32663 ]
-[v F44 `(v ~T0 @X0 1 tf1`ul ]
-"20 C:\Program Files\Microchip\xc8\v2.46\pic\include\builtins.h
-[v __delay `JF44 ~T0 @X0 0 e ]
-[p i __delay ]
 [t ~ __interrupt . k ]
 [t T42 __interrupt  ]
-"9934 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
+"9934
 [v _LATA1 `Vb ~T0 @X0 0 e@31817 ]
 [; ;xc.h: 18: extern const char __xc8_OPTIM_SPEED;
 [; ;xc.h: 20: extern double __fpnormalize(double);
@@ -81,7 +83,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;builtins.h: 22: extern __nonreentrant void _delaywdt(uint32_t);
 [; ;builtins.h: 25: extern __nonreentrant void _delay3(uint8_t);
 [; ;pic18f4550.h: 52: extern volatile unsigned char SPPDATA __at(0xF62);
-"54 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
+"54 /Applications/microchip/xc8/v2.46/pic/include/proc/pic18f4550.h
 [; ;pic18f4550.h: 54: asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
 [; ;pic18f4550.h: 57: typedef union {
@@ -3609,7 +3611,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ..
 ]
-[; ;Laboratorio03.c: 10: int color[] = {2 , 6 , 4 , 5 , 1 , 0};
+[; ;Laboratorio03.c: 10: int color[] = {2, 6, 4, 5, 1, 0};
 "11
 [v _rojo `i ~T0 @X0 1 e ]
 [i _rojo
@@ -3678,126 +3680,145 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Laboratorio03.c: 36: INT1IE = 1;
 "36
 [e = _INT1IE -> -> 1 `i `b ]
-[; ;Laboratorio03.c: 38: GIE = 1;
+[; ;Laboratorio03.c: 38: INTEDG2 = 1;
 "38
-[e = _GIE -> -> 1 `i `b ]
-[; ;Laboratorio03.c: 39: while (1) {
+[e = _INTEDG2 -> -> 1 `i `b ]
+[; ;Laboratorio03.c: 39: INT2IF = 0;
 "39
+[e = _INT2IF -> -> 0 `i `b ]
+[; ;Laboratorio03.c: 40: INT2IE = 1;
+"40
+[e = _INT2IE -> -> 1 `i `b ]
+[; ;Laboratorio03.c: 43: GIE = 1;
+"43
+[e = _GIE -> -> 1 `i `b ]
+[; ;Laboratorio03.c: 45: while (1) {
+"45
 [e :U 364 ]
 {
-[; ;Laboratorio03.c: 41: if (LATD == 0b00001010) {
-"41
-[e $ ! == -> _LATD `i -> 10 `i 366  ]
-{
-[; ;Laboratorio03.c: 42: LATD = 0;
-"42
-[e = _LATD -> -> 0 `i `uc ]
-[; ;Laboratorio03.c: 43: LATE=color[colorIndice%6];
-"43
-[e = _LATE -> *U + &U _color * -> -> % _colorIndice -> 6 `i `ui `ux -> -> # *U &U _color `ui `ux `uc ]
-[; ;Laboratorio03.c: 44: colorIndice++;
-"44
-[e ++ _colorIndice -> 1 `i ]
-"45
-}
-[e :U 366 ]
-[; ;Laboratorio03.c: 45: }
-[; ;Laboratorio03.c: 46: _delay((unsigned long)((1000)*(4000000/4000.0)));
-"46
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;Laboratorio03.c: 47: if(parar){
 "47
-[e $ ! != _parar -> 0 `i 367  ]
-{
-[; ;Laboratorio03.c: 48: LATD++;
-"48
-[e ++ _LATD -> -> 1 `i `uc ]
-"51
-}
-[e :U 367 ]
-"52
 }
 [e :U 363 ]
-"39
+"45
 [e $U 364  ]
 [e :U 365 ]
-[; ;Laboratorio03.c: 51: }
-[; ;Laboratorio03.c: 52: }
-[; ;Laboratorio03.c: 53: return;
-"53
+[; ;Laboratorio03.c: 47: }
+[; ;Laboratorio03.c: 48: return;
+"48
 [e $UE 362  ]
-[; ;Laboratorio03.c: 54: }
-"54
+[; ;Laboratorio03.c: 49: }
+"49
 [e :UE 362 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-"56
+"51
 [v _ISR `(v ~T42 @X0 1 ef ]
 {
-[; ;Laboratorio03.c: 56: void __interrupt() ISR(void) {
+[; ;Laboratorio03.c: 51: void __interrupt() ISR(void) {
 [e :U _ISR ]
 [f ]
-[; ;Laboratorio03.c: 57: if (TMR0IF == 1) {
-"57
-[e $ ! == -> _TMR0IF `i -> 1 `i 369  ]
+[; ;Laboratorio03.c: 52: if (TMR0IF == 1) {
+"52
+[e $ ! == -> _TMR0IF `i -> 1 `i 367  ]
 {
-[; ;Laboratorio03.c: 58: TMR0 = 3036;
-"58
+[; ;Laboratorio03.c: 53: TMR0 = 3036;
+"53
 [e = _TMR0 -> -> 3036 `i `us ]
-[; ;Laboratorio03.c: 59: TMR0IF = 0;
-"59
+[; ;Laboratorio03.c: 54: TMR0IF = 0;
+"54
 [e = _TMR0IF -> -> 0 `i `b ]
-[; ;Laboratorio03.c: 60: LATA1 = !LATA1;
-"60
+[; ;Laboratorio03.c: 55: LATA1 = !LATA1;
+"55
 [e = _LATA1 ! _LATA1 ]
-"61
+"56
 }
-[e :U 369 ]
-[; ;Laboratorio03.c: 61: }
-[; ;Laboratorio03.c: 62: if (INT0IF == 1) {
-"62
-[e $ ! == -> _INT0IF `i -> 1 `i 370  ]
+[e :U 367 ]
+[; ;Laboratorio03.c: 56: }
+[; ;Laboratorio03.c: 57: if (INT0IF == 1) {
+"57
+[e $ ! == -> _INT0IF `i -> 1 `i 368  ]
 {
-[; ;Laboratorio03.c: 63: INT0IF = 0;
-"63
+[; ;Laboratorio03.c: 58: INT0IF = 0;
+"58
 [e = _INT0IF -> -> 0 `i `b ]
-[; ;Laboratorio03.c: 64: if(parar){
-"64
-[e $ ! != _parar -> 0 `i 371  ]
+[; ;Laboratorio03.c: 59: if (parar) {
+"59
+[e $ ! != _parar -> 0 `i 369  ]
 {
-[; ;Laboratorio03.c: 65: LATD = 0;
-"65
+[; ;Laboratorio03.c: 60: LATD++;
+"60
+[e ++ _LATD -> -> 1 `i `uc ]
+[; ;Laboratorio03.c: 62: if (LATD == 0b00001010) {
+"62
+[e $ ! == -> _LATD `i -> 10 `i 370  ]
+{
+[; ;Laboratorio03.c: 63: LATD = 0;
+"63
 [e = _LATD -> -> 0 `i `uc ]
-[; ;Laboratorio03.c: 66: LATE = 0b00000111;
-"66
-[e = _LATE -> -> 7 `i `uc ]
-[; ;Laboratorio03.c: 67: colorIndice = 0;}
-"67
-[e = _colorIndice -> 0 `i ]
-}
-[e :U 371 ]
-"68
+[; ;Laboratorio03.c: 64: colorIndice++;
+"64
+[e ++ _colorIndice -> 1 `i ]
+"65
 }
 [e :U 370 ]
+[; ;Laboratorio03.c: 65: }
+[; ;Laboratorio03.c: 66: LATE = color[colorIndice % 6];
+"66
+[e = _LATE -> *U + &U _color * -> -> % _colorIndice -> 6 `i `ui `ux -> -> # *U &U _color `ui `ux `uc ]
+"67
+}
+[e :U 369 ]
+"68
+}
+[e :U 368 ]
+[; ;Laboratorio03.c: 67: }
 [; ;Laboratorio03.c: 68: }
 [; ;Laboratorio03.c: 69: if (INT1IF == 1) {
 "69
-[e $ ! == -> _INT1IF `i -> 1 `i 372  ]
+[e $ ! == -> _INT1IF `i -> 1 `i 371  ]
 {
 [; ;Laboratorio03.c: 70: INT1IF = 0;
 "70
 [e = _INT1IF -> -> 0 `i `b ]
-[; ;Laboratorio03.c: 71: LATE = rojo;
+[; ;Laboratorio03.c: 71: if (parar) {
 "71
-[e = _LATE -> _rojo `uc ]
-[; ;Laboratorio03.c: 72: parar = 0;
+[e $ ! != _parar -> 0 `i 372  ]
+{
+[; ;Laboratorio03.c: 72: LATD = 0;
 "72
-[e = _parar -> 0 `i ]
+[e = _LATD -> -> 0 `i `uc ]
+[; ;Laboratorio03.c: 73: LATE = 0b00000111;
 "73
+[e = _LATE -> -> 7 `i `uc ]
+[; ;Laboratorio03.c: 74: colorIndice = 0;
+"74
+[e = _colorIndice -> 0 `i ]
+"75
 }
 [e :U 372 ]
-[; ;Laboratorio03.c: 73: }
-[; ;Laboratorio03.c: 74: }
-"74
-[e :UE 368 ]
+"76
+}
+[e :U 371 ]
+[; ;Laboratorio03.c: 75: }
+[; ;Laboratorio03.c: 76: }
+[; ;Laboratorio03.c: 77: if (INT2IF == 1) {
+"77
+[e $ ! == -> _INT2IF `i -> 1 `i 373  ]
+{
+[; ;Laboratorio03.c: 78: INT2IF = 0;
+"78
+[e = _INT2IF -> -> 0 `i `b ]
+[; ;Laboratorio03.c: 79: LATE = rojo;
+"79
+[e = _LATE -> _rojo `uc ]
+[; ;Laboratorio03.c: 80: parar = 0;
+"80
+[e = _parar -> 0 `i ]
+"81
+}
+[e :U 373 ]
+[; ;Laboratorio03.c: 81: }
+[; ;Laboratorio03.c: 82: }
+"82
+[e :UE 366 ]
 }

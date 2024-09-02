@@ -7,7 +7,7 @@ unsigned char RS, i2c_add, BackLight_State = LCD_BACKLIGHT;
 //--------------------------------------------------
 void I2C_Master_Init()
 {
-  SSPCON1 = 0x27; //if i make this line 0x28 it works on proteus simulations.
+  SSPCON1 = 0x28; //if i make this line 0x28 it works on proteus simulations.
   SSPCON2 = 0x00;
   SSPSTAT = 0x00;
   SSPADD = ((_XTAL_FREQ/4)/I2C_BaudRate) - 1;

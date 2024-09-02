@@ -3615,18 +3615,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.c: 9: {
 [e :U _I2C_Master_Init ]
 [f ]
-[; ;lcd.c: 10: SSPCON1 = 0x27;
+[; ;lcd.c: 10: SSPCON1 = 0x28;
 "10
-[e = _SSPCON1 -> -> 39 `i `uc ]
+[e = _SSPCON1 -> -> 40 `i `uc ]
 [; ;lcd.c: 11: SSPCON2 = 0x00;
 "11
 [e = _SSPCON2 -> -> 0 `i `uc ]
 [; ;lcd.c: 12: SSPSTAT = 0x00;
 "12
 [e = _SSPSTAT -> -> 0 `i `uc ]
-[; ;lcd.c: 13: SSPADD = ((4000000/2)/100000) - 1;
+[; ;lcd.c: 13: SSPADD = ((4000000/4)/100000) - 1;
 "13
-[e = _SSPADD -> - / / -> 4000000 `l -> -> 2 `i `l -> 100000 `l -> -> 1 `i `l `uc ]
+[e = _SSPADD -> - / / -> 4000000 `l -> -> 4 `i `l -> 100000 `l -> -> 1 `i `l `uc ]
 [; ;lcd.c: 14: TRISB1 = 1;
 "14
 [e = _TRISB1 -> -> 1 `i `b ]

@@ -5785,15 +5785,19 @@ extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
 
-# 7 "Lab4.c"
+# 9 "Lab4.c"
 #pragma config WDT = OFF
 #pragma config FOSC = HS
 #pragma config LVP = OFF
 #pragma config PBADEN = OFF
 
 void main(void) {
+_delay((unsigned long)((500)*(4000000/4000.0)));
+
 I2C_Master_Init();
 I2C_Master_Start();
+
+
 
 LCD_Init(0x27);
 LCD_Clear();
@@ -5802,7 +5806,8 @@ LCD_Write_String("Hola mundo");
 noBacklight();
 
 while (1) {
-
+LCD_Set_Cursor(1, 1);
+LCD_Write_String("Hola mundo");
 
 }
 

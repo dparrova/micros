@@ -1,5 +1,9 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
+[v F44 `(v ~T0 @X0 1 tf1`ul ]
+"20 /Applications/microchip/xc8/v2.46/pic/include/builtins.h
+[v __delay `JF44 ~T0 @X0 0 e ]
+[p i __delay ]
 "33 lcd.h
 [v _I2C_Master_Init `(v ~T0 @X0 0 ef ]
 "35
@@ -3632,59 +3636,68 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 190: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 194: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 195: extern int printf(const char *, ...);
-"7 Lab4.c
+"9 Lab4.c
 [p x WDT=OFF ]
-"8
-[p x FOSC=HS ]
-"9
-[p x LVP=OFF ]
 "10
+[p x FOSC=HS ]
+"11
+[p x LVP=OFF ]
+"12
 [p x PBADEN=OFF ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"12
+"14
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;Lab4.c: 12: void main(void) {
+[; ;Lab4.c: 14: void main(void) {
 [e :U _main ]
 [f ]
-[; ;Lab4.c: 13: I2C_Master_Init();
-"13
-[e ( _I2C_Master_Init ..  ]
-[; ;Lab4.c: 14: I2C_Master_Start();
-"14
-[e ( _I2C_Master_Start ..  ]
-[; ;Lab4.c: 16: LCD_Init(0x27);
-"16
-[e ( _LCD_Init (1 -> -> 39 `i `uc ]
-[; ;Lab4.c: 17: LCD_Clear();
+[; ;Lab4.c: 15: _delay((unsigned long)((500)*(4000000/4000.0)));
+"15
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;Lab4.c: 17: I2C_Master_Init();
 "17
-[e ( _LCD_Clear ..  ]
-[; ;Lab4.c: 18: LCD_Set_Cursor(1, 1);
+[e ( _I2C_Master_Init ..  ]
+[; ;Lab4.c: 18: I2C_Master_Start();
 "18
-[e ( _LCD_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-[; ;Lab4.c: 19: LCD_Write_String("Hola mundo");
-"19
-[e ( _LCD_Write_String (1 -> :s 1C `*uc ]
-[; ;Lab4.c: 20: noBacklight();
-"20
-[e ( _noBacklight ..  ]
-[; ;Lab4.c: 22: while (1) {
+[e ( _I2C_Master_Start ..  ]
+[; ;Lab4.c: 22: LCD_Init(0x27);
 "22
+[e ( _LCD_Init (1 -> -> 39 `i `uc ]
+[; ;Lab4.c: 23: LCD_Clear();
+"23
+[e ( _LCD_Clear ..  ]
+[; ;Lab4.c: 24: LCD_Set_Cursor(1, 1);
+"24
+[e ( _LCD_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
+[; ;Lab4.c: 25: LCD_Write_String("Hola mundo");
+"25
+[e ( _LCD_Write_String (1 -> :s 1C `*uc ]
+[; ;Lab4.c: 26: noBacklight();
+"26
+[e ( _noBacklight ..  ]
+[; ;Lab4.c: 28: while (1) {
+"28
 [e :U 365 ]
 {
-"25
+[; ;Lab4.c: 29: LCD_Set_Cursor(1, 1);
+"29
+[e ( _LCD_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
+[; ;Lab4.c: 30: LCD_Write_String("Hola mundo");
+"30
+[e ( _LCD_Write_String (1 -> :s 2C `*uc ]
+"32
 }
 [e :U 364 ]
-"22
+"28
 [e $U 365  ]
 [e :U 366 ]
-[; ;Lab4.c: 25: }
-[; ;Lab4.c: 27: return;
-"27
+[; ;Lab4.c: 32: }
+[; ;Lab4.c: 34: return;
+"34
 [e $UE 363  ]
-[; ;Lab4.c: 28: }
-"28
+[; ;Lab4.c: 35: }
+"35
 [e :UE 363 ]
 }
 [a 1C 72 111 108 97 32 109 117 110 100 111 0 ]
-
+[a 2C 72 111 108 97 32 109 117 110 100 111 0 ]
