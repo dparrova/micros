@@ -5692,6 +5692,8 @@ void noBacklight();
 void LCD_SR();
 void LCD_SL();
 void LCD_Clear();
+void LCD_CHAR_PROPIO();
+void Cursor();
 
 # 30 "/Applications/microchip/xc8/v2.46/pic/include/c90/math.h"
 extern double fabs(double);
@@ -5785,31 +5787,50 @@ extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
 
-# 9 "Lab4.c"
+# 11 "Lab4.c"
 #pragma config WDT = OFF
 #pragma config FOSC = HS
 #pragma config LVP = OFF
 #pragma config PBADEN = OFF
 
+void mensaje2 (void);
+
 void main(void) {
+
+
+
 _delay((unsigned long)((500)*(4000000/4000.0)));
 
 I2C_Master_Init();
 I2C_Master_Start();
 
-
-
-LCD_Init(0x27);
+LCD_Init(0x4E);
 LCD_Clear();
-LCD_Set_Cursor(1, 1);
-LCD_Write_String("Hola mundo");
-noBacklight();
+LCD_Set_Cursor(1, 4);
+LCD_Write_String("Bie");
+LCD_Set_Cursor(2, 1);
+LCD_Write_String("Grupo 2:");
+LCD_CHAR_PROPIO();
+LCD_Write_Char(0x00);
+Backlight();
 
+
+
+
+LCD_Clear();
+mensaje2();
 while (1) {
-LCD_Set_Cursor(1, 1);
-LCD_Write_String("Hola mundo");
+
+
 
 }
 
 return;
+}
+
+void mensaje2 (void){
+LCD_Set_Cursor(1, 1);
+LCD_Write_String("Piezas a contar:");
+LCD_Set_Cursor(2, 1);
+Cursor();
 }

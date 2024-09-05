@@ -54,3 +54,5 @@ void noBacklight();
 void LCD_SR();
 void LCD_SL();
 void LCD_Clear();
+void LCD_CHAR_PROPIO();
+void Cursor();

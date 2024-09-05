@@ -184,3 +184,35 @@ void LCD_Clear()
   LCD_CMD(0x01);
   __delay_us(40);
 }
+
+void Cursor()
+{
+  LCD_CMD(0xD);
+  __delay_us(40);
+}
+
+
+void LCD_CHAR_PROPIO()
+{
+  LCD_CMD(0x80); //DIRECCION 
+  __delay_us(40);
+  LCD_CMD(0x40);
+    __delay_us(40);
+    
+    
+  LCD_CMD(0x40+0xe);
+    __delay_us(40);
+  LCD_CMD(0x40+0x4);
+    __delay_us(40);
+  LCD_CMD(0x40+0xe);
+    __delay_us(40);
+  LCD_CMD(0x40+0x15);
+    __delay_us(40);
+  LCD_CMD(0x40+0x4);
+    __delay_us(40);
+  LCD_CMD(0x40+0xa);
+    __delay_us(40);
+  LCD_CMD(0x40+0x1b);
+    __delay_us(40);
+  
+}
