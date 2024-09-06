@@ -29,7 +29,7 @@
 [v ___omul __omul `(ul  1 e 4 0 ]
 "16 D:\Universidad\Microcontroladores\Repositorio_Git\micros\Laboratorio03.X\Laboratorio03.c
 [v _main main `(v  1 e 1 0 ]
-"56
+"55
 [v _ISR ISR `IIH(v  1 e 1 0 ]
 "3263 C:\Program Files\Microchip\xc8\v2.46\pic\include\proc\pic18f4550.h
 [v _LATD LATD `VEuc  1 e 1 @3980 ]
@@ -57,10 +57,16 @@
 [v _INT1IE INT1IE `VEb  1 e 0 @32643 ]
 "9847
 [v _INT1IF INT1IF `VEb  1 e 0 @32640 ]
+"9865
+[v _INT2IE INT2IE `VEb  1 e 0 @32644 ]
+"9868
+[v _INT2IF INT2IF `VEb  1 e 0 @32641 ]
 "9877
 [v _INTEDG0 INTEDG0 `VEb  1 e 0 @32654 ]
 "9880
 [v _INTEDG1 INTEDG1 `VEb  1 e 0 @32653 ]
+"9883
+[v _INTEDG2 INTEDG2 `VEb  1 e 0 @32652 ]
 "9934
 [v _LATA1 LATA1 `VEb  1 e 0 @31817 ]
 "10816
@@ -78,7 +84,7 @@
 "16
 [v _main main `(v  1 e 1 0 ]
 {
-"54
+"53
 } 0
 "7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -91,8 +97,8 @@
 [v ___awmod@divisor divisor `i  1 p 2 2 ]
 "34
 } 0
-"56 D:\Universidad\Microcontroladores\Repositorio_Git\micros\Laboratorio03.X\Laboratorio03.c
+"55 D:\Universidad\Microcontroladores\Repositorio_Git\micros\Laboratorio03.X\Laboratorio03.c
 [v _ISR ISR `IIH(v  1 e 1 0 ]
 {
-"74
+"80
 } 0

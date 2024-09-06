@@ -1,5 +1,5 @@
 #include <xc.h>
-#define _XTAL_FREQ 4000000
+
 #pragma config WDT = OFF
 #pragma config FOSC = HS
 #pragma config LVP = OFF
@@ -34,6 +34,11 @@ void main(void) {
     INTEDG1 = 1;
     INT1IF = 0; // Inicio configuración interruptor
     INT1IE = 1; // fin interruptor
+    
+    INTEDG2 =1;
+    INT2IF = 0;
+    INT2IE = 1; 
+    
 
     GIE = 1;
      while (1) {
@@ -43,12 +48,6 @@ void main(void) {
             LATE=color[colorIndice%6];
             colorIndice++;
         }   
-            __delay_ms(1000);
-            if(parar){
-            LATD++;
-            
-            
-            }
     }
     return;
 }
@@ -70,5 +69,12 @@ void __interrupt() ISR(void) {
        INT1IF = 0;
        LATE = rojo;
        parar = 0;
+    }
+    
+    if (INT2IF == 1) {
+       INT2IF = 0;
+       if(parar){
+       LATD++;
+       }
     }
 }

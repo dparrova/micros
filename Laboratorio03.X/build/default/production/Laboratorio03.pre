@@ -5704,6 +5704,11 @@ INTEDG1 = 1;
 INT1IF = 0;
 INT1IE = 1;
 
+INTEDG2 =1;
+INT2IF = 0;
+INT2IE = 1;
+
+
 GIE = 1;
 while (1) {
 
@@ -5711,12 +5716,6 @@ if (LATD == 0b00001010) {
 LATD = 0;
 LATE=color[colorIndice%6];
 colorIndice++;
-}
-_delay((unsigned long)((1000)*(4000000/4000.0)));
-if(parar){
-LATD++;
-
-
 }
 }
 return;
@@ -5739,5 +5738,12 @@ if (INT1IF == 1) {
 INT1IF = 0;
 LATE = rojo;
 parar = 0;
+}
+
+if (INT2IF == 1) {
+INT2IF = 0;
+if(parar){
+LATD++;
+}
 }
 }
