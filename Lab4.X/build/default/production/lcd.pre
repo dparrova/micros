@@ -5705,7 +5705,7 @@ void I2C_Master_Init()
 SSPCON1 = 0x28;
 SSPCON2 = 0x00;
 SSPSTAT = 0x00;
-SSPADD = ((4000000/4)/100000) - 1;
+SSPADD = ((1000000/2)/100000) - 1;
 TRISB1 = 1;
 TRISB0 = 1;
 }
@@ -5772,23 +5772,23 @@ void LCD_Init(unsigned char I2C_Add)
 {
 i2c_add = I2C_Add;
 IO_Expander_Write(0x00);
-_delay((unsigned long)((30)*(4000000/4000.0)));
+_delay((unsigned long)((30)*(1000000/4000.0)));
 LCD_CMD(0x03);
-_delay((unsigned long)((5)*(4000000/4000.0)));
+_delay((unsigned long)((5)*(1000000/4000.0)));
 LCD_CMD(0x03);
-_delay((unsigned long)((5)*(4000000/4000.0)));
+_delay((unsigned long)((5)*(1000000/4000.0)));
 LCD_CMD(0x03);
-_delay((unsigned long)((5)*(4000000/4000.0)));
+_delay((unsigned long)((5)*(1000000/4000.0)));
 LCD_CMD(0x02);
-_delay((unsigned long)((5)*(4000000/4000.0)));
+_delay((unsigned long)((5)*(1000000/4000.0)));
 LCD_CMD(0x20 | (2 << 2));
-_delay((unsigned long)((50)*(4000000/4000.0)));
+_delay((unsigned long)((50)*(1000000/4000.0)));
 LCD_CMD(0x0C);
-_delay((unsigned long)((50)*(4000000/4000.0)));
+_delay((unsigned long)((50)*(1000000/4000.0)));
 LCD_CMD(0x01);
-_delay((unsigned long)((50)*(4000000/4000.0)));
+_delay((unsigned long)((50)*(1000000/4000.0)));
 LCD_CMD(0x04 | 0x02);
-_delay((unsigned long)((50)*(4000000/4000.0)));
+_delay((unsigned long)((50)*(1000000/4000.0)));
 }
 
 void IO_Expander_Write(unsigned char Data)
@@ -5805,7 +5805,7 @@ void LCD_Write_4Bit(unsigned char Nibble)
 Nibble |= RS;
 IO_Expander_Write(Nibble | 0x04);
 IO_Expander_Write(Nibble & 0xFB);
-_delay((unsigned long)((50)*(4000000/4000000.0)));
+_delay((unsigned long)((50)*(1000000/4000000.0)));
 }
 
 void LCD_CMD(unsigned char CMD)
@@ -5862,49 +5862,49 @@ IO_Expander_Write(0);
 void LCD_SL()
 {
 LCD_CMD(0x18);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 }
 
 void LCD_SR()
 {
 LCD_CMD(0x1C);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 }
 
 void LCD_Clear()
 {
 LCD_CMD(0x01);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 }
 
 void Cursor()
 {
 LCD_CMD(0xD);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 }
 
 
 void LCD_CHAR_PROPIO()
 {
 LCD_CMD(0x80);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 LCD_CMD(0x40);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 
 
 LCD_CMD(0x40+0xe);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 LCD_CMD(0x40+0x4);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 LCD_CMD(0x40+0xe);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 LCD_CMD(0x40+0x15);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 LCD_CMD(0x40+0x4);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 LCD_CMD(0x40+0xa);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 LCD_CMD(0x40+0x1b);
-_delay((unsigned long)((40)*(4000000/4000000.0)));
+_delay((unsigned long)((40)*(1000000/4000000.0)));
 
 }

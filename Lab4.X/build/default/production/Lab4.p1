@@ -1,5 +1,21 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
+"3625 /Applications/microchip/xc8/v2.46/pic/include/proc/pic18f4550.h
+[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
+"4001
+[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
+"3073
+[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
+"3263
+[v _LATD `Vuc ~T0 @X0 0 e@3980 ]
+"10396
+[v _RBPU `Vb ~T0 @X0 0 e@32655 ]
+"10390
+[v _RBIF `Vb ~T0 @X0 0 e@32656 ]
+"10387
+[v _RBIE `Vb ~T0 @X0 0 e@32659 ]
+"9745
+[v _GIE `Vb ~T0 @X0 0 e@32663 ]
 [v F44 `(v ~T0 @X0 1 tf1`ul ]
 "20 /Applications/microchip/xc8/v2.46/pic/include/builtins.h
 [v __delay `JF44 ~T0 @X0 0 e ]
@@ -22,10 +38,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LCD_Write_Char `(v ~T0 @X0 0 ef1`uc ]
 "52
 [v _Backlight `(v ~T0 @X0 0 ef ]
-"16 Lab4.c
+"22 Lab4.c
 [v _mensaje2 `(v ~T0 @X0 0 ef ]
 "58 lcd.h
 [v _Cursor `(v ~T0 @X0 0 ef ]
+"2453 /Applications/microchip/xc8/v2.46/pic/include/proc/pic18f4550.h
+[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
+[t ~ __deprecated__ ]
+[t T16 __deprecated__ ]
+"10375
+[v _RB4 `Vb ~T16 @X0 0 e@31756 ]
+"10378
+[v _RB5 `Vb ~T16 @X0 0 e@31757 ]
+"10381
+[v _RB6 `Vb ~T16 @X0 0 e@31758 ]
+"10384
+[v _RB7 `Vb ~T16 @X0 0 e@31759 ]
 [; ;xc.h: 18: extern const char __xc8_OPTIM_SPEED;
 [; ;xc.h: 20: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3646,103 +3674,314 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 190: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 194: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 195: extern int printf(const char *, ...);
-"11 Lab4.c
+"13 Lab4.c
 [p x WDT=OFF ]
-"12
-[p x FOSC=HS ]
-"13
-[p x LVP=OFF ]
 "14
+[p x FOSC=INTOSC_EC ]
+"15
+[p x LVP=OFF ]
+"16
 [p x PBADEN=OFF ]
-[; ;Lab4.c: 16: void mensaje2 (void);
+"19
+[v _Tecla `uc ~T0 @X0 1 e ]
+[i _Tecla
+-> -> 0 `i `uc
+]
+[; ;Lab4.c: 19: unsigned char Tecla=0;
+[; ;Lab4.c: 21: void interrupt ISR(void);
+[; ;Lab4.c: 22: void mensaje2 (void);
 [v $root$_main `(v ~T0 @X0 0 e ]
-"18
+"24
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;Lab4.c: 18: void main(void) {
+[; ;Lab4.c: 24: void main(void) {
 [e :U _main ]
 [f ]
-[; ;Lab4.c: 22: _delay((unsigned long)((500)*(4000000/4000.0)));
-"22
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;Lab4.c: 24: I2C_Master_Init();
-"24
-[e ( _I2C_Master_Init ..  ]
-[; ;Lab4.c: 25: I2C_Master_Start();
+[; ;Lab4.c: 25: TRISB= 0b11110000;
 "25
-[e ( _I2C_Master_Start ..  ]
-[; ;Lab4.c: 27: LCD_Init(0x4E);
+[e = _TRISB -> -> 240 `i `uc ]
+[; ;Lab4.c: 26: TRISD=0;
+"26
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;Lab4.c: 27: LATB= 0b00000000;
 "27
-[e ( _LCD_Init (1 -> -> 78 `i `uc ]
-[; ;Lab4.c: 28: LCD_Clear();
+[e = _LATB -> -> 0 `i `uc ]
+[; ;Lab4.c: 28: LATD=0;
 "28
-[e ( _LCD_Clear ..  ]
-[; ;Lab4.c: 29: LCD_Set_Cursor(1, 4);
+[e = _LATD -> -> 0 `i `uc ]
+[; ;Lab4.c: 29: RBPU=0;
 "29
-[e ( _LCD_Set_Cursor (2 , -> -> 1 `i `uc -> -> 4 `i `uc ]
-[; ;Lab4.c: 30: LCD_Write_String("Bie");
-"30
-[e ( _LCD_Write_String (1 -> :s 1C `*uc ]
-[; ;Lab4.c: 31: LCD_Set_Cursor(2, 1);
+[e = _RBPU -> -> 0 `i `b ]
+[; ;Lab4.c: 31: RBIF=0;
 "31
-[e ( _LCD_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-[; ;Lab4.c: 32: LCD_Write_String("Grupo 2:");
+[e = _RBIF -> -> 0 `i `b ]
+[; ;Lab4.c: 32: RBIE=1;
 "32
-[e ( _LCD_Write_String (1 -> :s 2C `*uc ]
-[; ;Lab4.c: 33: LCD_CHAR_PROPIO();
+[e = _RBIE -> -> 1 `i `b ]
+[; ;Lab4.c: 33: GIE=1;
 "33
-[e ( _LCD_CHAR_PROPIO ..  ]
-[; ;Lab4.c: 34: LCD_Write_Char(0x00);
-"34
-[e ( _LCD_Write_Char (1 -> -> 0 `i `uc ]
-[; ;Lab4.c: 35: Backlight();
-"35
-[e ( _Backlight ..  ]
-[; ;Lab4.c: 40: LCD_Clear();
+[e = _GIE -> -> 1 `i `b ]
+[; ;Lab4.c: 37: _delay((unsigned long)((500)*(1000000/4000.0)));
+"37
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;Lab4.c: 39: I2C_Master_Init();
+"39
+[e ( _I2C_Master_Init ..  ]
+[; ;Lab4.c: 40: I2C_Master_Start();
 "40
-[e ( _LCD_Clear ..  ]
-[; ;Lab4.c: 41: mensaje2();
-"41
-[e ( _mensaje2 ..  ]
-[; ;Lab4.c: 42: while (1) {
+[e ( _I2C_Master_Start ..  ]
+[; ;Lab4.c: 42: LCD_Init(0x4E);
 "42
+[e ( _LCD_Init (1 -> -> 78 `i `uc ]
+[; ;Lab4.c: 43: LCD_Clear();
+"43
+[e ( _LCD_Clear ..  ]
+[; ;Lab4.c: 44: LCD_Set_Cursor(1, 4);
+"44
+[e ( _LCD_Set_Cursor (2 , -> -> 1 `i `uc -> -> 4 `i `uc ]
+[; ;Lab4.c: 45: LCD_Write_String("Bie");
+"45
+[e ( _LCD_Write_String (1 -> :s 1C `*uc ]
+[; ;Lab4.c: 46: LCD_Set_Cursor(2, 1);
+"46
+[e ( _LCD_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+[; ;Lab4.c: 47: LCD_Write_String("Grupo 2:");
+"47
+[e ( _LCD_Write_String (1 -> :s 2C `*uc ]
+[; ;Lab4.c: 48: LCD_CHAR_PROPIO();
+"48
+[e ( _LCD_CHAR_PROPIO ..  ]
+[; ;Lab4.c: 49: LCD_Write_Char(0x00);
+"49
+[e ( _LCD_Write_Char (1 -> -> 0 `i `uc ]
+[; ;Lab4.c: 50: Backlight();
+"50
+[e ( _Backlight ..  ]
+[; ;Lab4.c: 54: LCD_Clear();
+"54
+[e ( _LCD_Clear ..  ]
+[; ;Lab4.c: 55: mensaje2();
+"55
+[e ( _mensaje2 ..  ]
+[; ;Lab4.c: 56: while (1) {
+"56
 [e :U 365 ]
 {
-"46
+"60
 }
 [e :U 364 ]
-"42
+"56
 [e $U 365  ]
 [e :U 366 ]
-[; ;Lab4.c: 46: }
-[; ;Lab4.c: 48: return;
-"48
+[; ;Lab4.c: 60: }
+[; ;Lab4.c: 62: return;
+"62
 [e $UE 363  ]
-[; ;Lab4.c: 49: }
-"49
+[; ;Lab4.c: 63: }
+"63
 [e :UE 363 ]
 }
-"51
+"65
 [v _mensaje2 `(v ~T0 @X0 1 ef ]
 {
-[; ;Lab4.c: 51: void mensaje2 (void){
+[; ;Lab4.c: 65: void mensaje2 (void){
 [e :U _mensaje2 ]
 [f ]
-[; ;Lab4.c: 52: LCD_Set_Cursor(1, 1);
-"52
+[; ;Lab4.c: 66: LCD_Set_Cursor(1, 1);
+"66
 [e ( _LCD_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-[; ;Lab4.c: 53: LCD_Write_String("Piezas a contar:");
-"53
+[; ;Lab4.c: 67: LCD_Write_String("Piezas a contar:");
+"67
 [e ( _LCD_Write_String (1 -> :s 3C `*uc ]
-[; ;Lab4.c: 54: LCD_Set_Cursor(2, 1);
-"54
+[; ;Lab4.c: 68: LCD_Set_Cursor(2, 1);
+"68
 [e ( _LCD_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-[; ;Lab4.c: 55: Cursor();
-"55
+[; ;Lab4.c: 69: Cursor();
+"69
 [e ( _Cursor ..  ]
-[; ;Lab4.c: 56: }
-"56
+[; ;Lab4.c: 70: }
+"70
 [e :UE 367 ]
+}
+[v $root$_ISR `(v ~T0 @X0 0 e ]
+[v F3213 `(v ~T0 @X0 1 tf ]
+"72
+[v _ISR `IF3213 ~T0 @X0 1 e ]
+{
+[; ;Lab4.c: 72: void interrupt ISR(void){
+[e :U _ISR ]
+[f ]
+[; ;Lab4.c: 73: if(RBIF==1){
+"73
+[e $ ! == -> _RBIF `i -> 1 `i 369  ]
+{
+[; ;Lab4.c: 74: if(PORTB!=0b11110000){
+"74
+[e $ ! != -> _PORTB `i -> 240 `i 370  ]
+{
+[; ;Lab4.c: 75: Tecla=0;
+"75
+[e = _Tecla -> -> 0 `i `uc ]
+[; ;Lab4.c: 76: LATB=0b11111110;
+"76
+[e = _LATB -> -> 254 `i `uc ]
+[; ;Lab4.c: 77: if(RB4==0) Tecla=1;
+"77
+[e $ ! == -> _RB4 `i -> 0 `i 371  ]
+[e = _Tecla -> -> 1 `i `uc ]
+[e $U 372  ]
+"78
+[e :U 371 ]
+[; ;Lab4.c: 78: else if(RB5==0) Tecla=2;
+[e $ ! == -> _RB5 `i -> 0 `i 373  ]
+[e = _Tecla -> -> 2 `i `uc ]
+[e $U 374  ]
+"79
+[e :U 373 ]
+[; ;Lab4.c: 79: else if(RB6==0) Tecla=3;
+[e $ ! == -> _RB6 `i -> 0 `i 375  ]
+[e = _Tecla -> -> 3 `i `uc ]
+[e $U 376  ]
+"80
+[e :U 375 ]
+[; ;Lab4.c: 80: else if(RB7==0) Tecla=4;
+[e $ ! == -> _RB7 `i -> 0 `i 377  ]
+[e = _Tecla -> -> 4 `i `uc ]
+[e $U 378  ]
+"81
+[e :U 377 ]
+[; ;Lab4.c: 81: else{
+{
+[; ;Lab4.c: 82: LATB=0b11111101;
+"82
+[e = _LATB -> -> 253 `i `uc ]
+[; ;Lab4.c: 83: if(RB4==0) Tecla=5;
+"83
+[e $ ! == -> _RB4 `i -> 0 `i 379  ]
+[e = _Tecla -> -> 5 `i `uc ]
+[e $U 380  ]
+"84
+[e :U 379 ]
+[; ;Lab4.c: 84: else if(RB5==0) Tecla=6;
+[e $ ! == -> _RB5 `i -> 0 `i 381  ]
+[e = _Tecla -> -> 6 `i `uc ]
+[e $U 382  ]
+"85
+[e :U 381 ]
+[; ;Lab4.c: 85: else if(RB6==0) Tecla=7;
+[e $ ! == -> _RB6 `i -> 0 `i 383  ]
+[e = _Tecla -> -> 7 `i `uc ]
+[e $U 384  ]
+"86
+[e :U 383 ]
+[; ;Lab4.c: 86: else if(RB7==0) Tecla=8;
+[e $ ! == -> _RB7 `i -> 0 `i 385  ]
+[e = _Tecla -> -> 8 `i `uc ]
+[e $U 386  ]
+"87
+[e :U 385 ]
+[; ;Lab4.c: 87: else{
+{
+[; ;Lab4.c: 88: LATB=0b11111011;
+"88
+[e = _LATB -> -> 251 `i `uc ]
+[; ;Lab4.c: 89: if(RB4==0) Tecla=9;
+"89
+[e $ ! == -> _RB4 `i -> 0 `i 387  ]
+[e = _Tecla -> -> 9 `i `uc ]
+[e $U 388  ]
+"90
+[e :U 387 ]
+[; ;Lab4.c: 90: else if(RB5==0) Tecla=10;
+[e $ ! == -> _RB5 `i -> 0 `i 389  ]
+[e = _Tecla -> -> 10 `i `uc ]
+[e $U 390  ]
+"91
+[e :U 389 ]
+[; ;Lab4.c: 91: else if(RB6==0) Tecla=11;
+[e $ ! == -> _RB6 `i -> 0 `i 391  ]
+[e = _Tecla -> -> 11 `i `uc ]
+[e $U 392  ]
+"92
+[e :U 391 ]
+[; ;Lab4.c: 92: else if(RB7==0) Tecla=12;
+[e $ ! == -> _RB7 `i -> 0 `i 393  ]
+[e = _Tecla -> -> 12 `i `uc ]
+[e $U 394  ]
+"93
+[e :U 393 ]
+[; ;Lab4.c: 93: else{
+{
+[; ;Lab4.c: 94: LATB=0b11110111;
+"94
+[e = _LATB -> -> 247 `i `uc ]
+[; ;Lab4.c: 95: if(RB4==0) Tecla=13;
+"95
+[e $ ! == -> _RB4 `i -> 0 `i 395  ]
+[e = _Tecla -> -> 13 `i `uc ]
+[e $U 396  ]
+"96
+[e :U 395 ]
+[; ;Lab4.c: 96: else if(RB5==0) Tecla=14;
+[e $ ! == -> _RB5 `i -> 0 `i 397  ]
+[e = _Tecla -> -> 14 `i `uc ]
+[e $U 398  ]
+"97
+[e :U 397 ]
+[; ;Lab4.c: 97: else if(RB6==0) Tecla=15;
+[e $ ! == -> _RB6 `i -> 0 `i 399  ]
+[e = _Tecla -> -> 15 `i `uc ]
+[e $U 400  ]
+"98
+[e :U 399 ]
+[; ;Lab4.c: 98: else if(RB7==0) Tecla=16;
+[e $ ! == -> _RB7 `i -> 0 `i 401  ]
+[e = _Tecla -> -> 16 `i `uc ]
+[e :U 401 ]
+"99
+[e :U 400 ]
+[e :U 398 ]
+[e :U 396 ]
+}
+[e :U 394 ]
+[e :U 392 ]
+[e :U 390 ]
+[e :U 388 ]
+"100
+}
+[e :U 386 ]
+[e :U 384 ]
+[e :U 382 ]
+[e :U 380 ]
+"101
+}
+[e :U 378 ]
+[e :U 376 ]
+[e :U 374 ]
+[e :U 372 ]
+[; ;Lab4.c: 99: }
+[; ;Lab4.c: 100: }
+[; ;Lab4.c: 101: }
+[; ;Lab4.c: 102: LATB=0b11110000;
+"102
+[e = _LATB -> -> 240 `i `uc ]
+"103
+}
+[e :U 370 ]
+[; ;Lab4.c: 103: }
+[; ;Lab4.c: 104: _delay((unsigned long)((100)*(1000000/4000.0)));
+"104
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;Lab4.c: 105: RBIF=0;
+"105
+[e = _RBIF -> -> 0 `i `b ]
+"106
+}
+[e :U 369 ]
+[; ;Lab4.c: 106: }
+[; ;Lab4.c: 107: }
+"107
+[e :UE 368 ]
 }
 [a 1C 66 105 101 0 ]
 [a 3C 80 105 101 122 97 115 32 97 32 99 111 110 116 97 114 58 0 ]
