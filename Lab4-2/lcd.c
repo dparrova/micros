@@ -132,16 +132,6 @@ void Lcd_NoBlink(void)
     Lcd_Cmd(0x00);
     Lcd_Cmd(0x0C);
 }
-//void Lcd_Light_on(void)
-//{
-//    Lcd_Cmd(0x00);
-//    Lcd_Cmd(0x02);
-//}
-//void Lcd_Light_off(void)
-//{
-//    Lcd_Cmd(0x00);
-//    Lcd_Cmd(0x02);
-//}
 
 #ifdef USE_CGRAM_LCD
 void Lcd_CGRAM_CreateChar(char add, const char* chardata)

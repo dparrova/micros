@@ -1,19 +1,19 @@
 /* File: I2C_LCD.h */
 #include <xc.h>
 
-#define _XTAL_FREQ    1000000
+#define _XTAL_FREQ             48000000
 
 #define USE_CGRAM_LCD
 
-#define RS LATAbits.LA3
-#define EN LATAbits.LA4
+#define RS LATAbits.LA5
+#define EN LATAbits.LA6
 #define D4 LATDbits.LD4
 #define D5 LATDbits.LD5
 #define D6 LATDbits.LD6
 #define D7 LATDbits.LD7
 
-#define RS_DIR TRISAbits.TRISA3
-#define EN_DIR TRISAbits.TRISA4
+#define RS_DIR TRISAbits.TRISA5
+#define EN_DIR TRISAbits.TRISA6
 #define D4_DIR TRISDbits.TRISD4
 #define D5_DIR TRISDbits.TRISD5
 #define D6_DIR TRISDbits.TRISD6

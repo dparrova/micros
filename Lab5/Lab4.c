@@ -8,13 +8,13 @@
 
 #include <xc.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include "lcd.h"
 
 unsigned char Tecla = 0;
 
 int flagParar = 1;
-int menu = 2;
+//int flagReiniciar = 0;
+//int flagTerminar = 0;
 int v = 1023;
 int decena = 0;
 int unidad = 0;
@@ -30,8 +30,6 @@ char buffer[20] = "valor de ADC=";
  int cantidadRestaDecena = 0;
  int contadorUnidad = 0;
  int contadorDecena = 0;
- 
- unsigned int resultado_ADC; //VARIABLE DE ADC
 
 int color[] = {2, 6, 4, 5, 1, 0}; //magenta, azul, cyan, verde, amarillo y blanco
 int rojo = 3;
@@ -54,26 +52,18 @@ void ContarReal(void);
 void Reiniciar(void);
 void Terminar(void);
 void Trasmitir(void);
-unsigned int Conversion(unsigned char);
-void blacklighttoggle(void);
-void vaciar(void);
 
 void interrupt ISR(void);
 
 void main() {
-    ADCON0=0b00000001;
-    ADCON2=0b10001000;
-   
     int pina0;
     TRISE = 0;
     TRISD = 0;
     TRISA = 0b00000001;
-    TRISC = 0b00000000;
     
     LATD = 0b00000000; // DISPLAY  SEGMENTS
     LATE = 0b00000111; //LED RGB
 
-    LATA5=1;
     TXSTA = 0b00100100;
     RCSTA = 0b10000000;
     BAUDCON = 0b00001000;
@@ -92,7 +82,7 @@ void main() {
     RBIF = 0;
     RBIE = 1;
     GIE = 1;
-    ADCON1bits.PCFG = 0x0E;           // Coloca todos los pines como digitales
+    ADCON1bits.PCFG = 0x0F;           // Coloca todos los pines como digitales
     Lcd_Init(); // Inicializa la pantalla LCD
 
     Lcd_CGRAM_Init(); // Accede a la CRGAM
@@ -131,14 +121,8 @@ void main() {
     escenario1();
     
     while (1) {
-    resultado_ADC=Conversion(0);
-    sprintf(buffer, "Valor de ADC = %u", resultado_ADC);
     
-       if(resultado_ADC>550) LATC2 = 1;
-       else LATC2 = 0;
-
-    //itoa(resultado_ADC, 10 , buffer);
-    pina0 = PORTAbits.RA2; 
+    pina0 = PORTAbits.RA0; 
     if (mostrar && pina0==1) {
         ContarReal();
        
@@ -147,12 +131,7 @@ void main() {
 
 }
 
-void blacklighttoggle(void){
-    LATA5=!LATA5;
-}
-
 void escenario1(void) {
-    menu=1;
     Lcd_Clear();
     Lcd_Set_Cursor(1, 1);
     Lcd_Write_String("Piezas a contar:");
@@ -163,9 +142,8 @@ void escenario1(void) {
     Lcd_Blink();
 };
 
-void escenario2(void) { 
-    menu=2;
-    mostrar = 1;
+void escenario2(void) {
+    
     Lcd_Clear();
     Lcd_NoBlink();
     Lcd_Set_Cursor(1, 1);
@@ -173,27 +151,27 @@ void escenario2(void) {
     Lcd_Write_Char(cantidadRestaDecena);
     Lcd_Write_Char(cantidadRestaUnidad);
     Lcd_Set_Cursor(1, 14);
-    Lcd_Write_String("C=");
+    Lcd_Write_String("C:");
     Lcd_Write_Char(4);
     Lcd_Set_Cursor(2, 1);
     Lcd_Write_String("Objetivo:");
     Lcd_Write_Char(0b00110000 + decena);
     Lcd_Write_Char(0b00110000 + unidad);
     Lcd_Set_Cursor(2, 14);
-    Lcd_Write_String("#=X");
+    Lcd_Write_String("D:");
     Lcd_Write_Char(3);
-    
+    mostrar = 1;
+
 };
 
 void escenario3(void) {
-    menu=3;
     Lcd_Clear();
     Lcd_NoBlink();
     Lcd_Set_Cursor(1, 1);
     Lcd_Write_String("Cuenta finalizada");
     Lcd_Set_Cursor(2, 13);
     Lcd_Write_String("A:OK");
-
+    while(1);
 };
 
 void escenario4(void) { //PARADA DE EMERGENCIA
@@ -254,26 +232,16 @@ void ContarReal(void){
     contadorUnidad = (contador-1)%10;
     contadorDecena = (contador-1)/10;
     
+   // LATD=contadorUnidad;
     LATD = contadorUnidad;
     LATE = color[contadorDecena];
     escenario2();
     __delay_ms(1000);
     if(!cantidadResta) {
-        vaciar();
         escenario3();
+        mostrar = 0;
     }
     
-}
-
-void vaciar(void){
-        unidad = 0 ;
-        unidad = 0;
-        cantidadRestaUnidad =0b00110000 + unidad;
-        cantidadRestaDecena =0b00110000 + unidad;
-        LATD = 0;
-        LATE = color[0];
-        contador =0;
-        digito = 1;
 }
 
 void Reiniciar(void){
@@ -284,14 +252,18 @@ void Reiniciar(void){
         LATE = color[0];
         contador =0;
         digito = 1;
-        escenario2();
+        escenario3();
 }
 
-
-
 void Terminar(void){
-
-        vaciar();
+        unidad = 0 ;
+        unidad = 0;
+        cantidadRestaUnidad =0b00110000 + unidad;
+        cantidadRestaDecena =0b00110000 + unidad;
+        LATD = 0;
+        LATE = color[0];
+        contador =0;
+        digito = 1;
         escenario1();
      
 }
@@ -308,19 +280,6 @@ void Trasmitir(void){
     
 }
 
-unsigned int Conversion(unsigned char canal){
-    ADCON0=(ADCON0 & 0b00000011) | (canal<<2);
-    GO=1;   //bsf ADCON0,1
-    while(GO==1);
-    return ADRES;
-}
-
-void okmenu(void){
-    if(menu==1) ContarReal();
-    else if(menu==2);
-    else if(menu==3) escenario1();
-    
-}
 
 void interrupt ISR(void) {
     if (RBIF == 1 && flagParar) {
@@ -332,24 +291,24 @@ void interrupt ISR(void) {
             if (RB4 == 0) PiezaAContar('1'); // 1
             else if (RB5 == 0) PiezaAContar('2'); // 2
             else if (RB6 == 0) PiezaAContar('3'); // 3
-            else if (RB7 == 0 && menu!=2) okmenu(); // OK
+            else if (RB7 == 0) ContarReal(); // OK
             else {
                 LATB = 0b11111101;
                 if (RB4 == 0) PiezaAContar('4'); //4
                 else if (RB5 == 0) PiezaAContar('5'); //5
                 else if (RB6 == 0) PiezaAContar('6'); //6
-                else if (RB7 == 0 && menu==1) borrarDigito(); // BORRAR DIGITO
+                else if (RB7 == 0) borrarDigito(); // BORRAR DIGITO
                 else {
                     LATB = 0b11111011;
                     if (RB4 == 0) PiezaAContar('7'); //7
                     else if (RB5 == 0) PiezaAContar('8');
                     else if (RB6 == 0) PiezaAContar('9');
-                    else if (RB7 == 0 && menu==2) Reiniciar();
+                    else if (RB7 == 0) Reiniciar();
                     else {
                         LATB = 0b11110111;
-                        if (RB4 == 0) blacklighttoggle();
+                        if (RB4 == 0) Tecla = 13;
                         else if (RB5 == 0) PiezaAContar('0');
-                        else if (RB6 == 0 && menu==2) Terminar();
+                        else if (RB6 == 0) Terminar();
                         else if (RB7 == 0) escenario4();
                     }
                 }
