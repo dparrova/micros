@@ -54,9 +54,13 @@ void ContarReal(void);
 void Reiniciar(void);
 void Terminar(void);
 void Trasmitir(void);
-unsigned int Conversion(unsigned char);
 void blacklighttoggle(void);
 void vaciar(void);
+
+
+unsigned int Conversion(unsigned char); //ADC 
+
+void Duty_motor(float);
 
 void interrupt ISR(void);
 
@@ -76,7 +80,7 @@ void main() {
     LATA5=1;
     TXSTA = 0b00100100;
     RCSTA = 0b10000000;
-    BAUDCON = 0b00001000;
+    BAUDCON = 0b00001000; 
     SPBRG = 25;
     
     unsigned char i;
@@ -93,6 +97,15 @@ void main() {
     RBIE = 1;
     GIE = 1;
     ADCON1bits.PCFG = 0x0E;           // Coloca todos los pines como digitales
+    
+    PR2 = 249; // PERIDO DE 1KHZ
+    CCPR1L= 125; // DUTY CICLE
+    T2CON = 0; // PRESCALER DE 1
+    CCP1CON = 12; // MODO PWM
+    TMR2 =0 ; //INICA EN SERO 
+    TMR2ON =1;
+    
+    
     Lcd_Init(); // Inicializa la pantalla LCD
 
     Lcd_CGRAM_Init(); // Accede a la CRGAM
@@ -131,13 +144,12 @@ void main() {
     escenario1();
     
     while (1) {
-    resultado_ADC=Conversion(0);
+        
+//        
+    resultado_ADC= Conversion(0);
+    Duty_motor(resultado_ADC);
     sprintf(buffer, "Valor de ADC = %u", resultado_ADC);
     
-       if(resultado_ADC>550) LATC2 = 1;
-       else LATC2 = 0;
-
-    //itoa(resultado_ADC, 10 , buffer);
     pina0 = PORTAbits.RA2; 
     if (mostrar && pina0==1) {
         ContarReal();
@@ -287,25 +299,19 @@ void Reiniciar(void){
         escenario2();
 }
 
-
-
 void Terminar(void){
-
         vaciar();
         escenario1();
-     
 }
 
 void Trasmitir(void){
     int i;
-    
     for(i=0;buffer[i]!='\0';i++)
     {    
     while(TRMT==0);
     TXREG = buffer[i];
     }
     TXREG = '\n';
-    
 }
 
 unsigned int Conversion(unsigned char canal){
@@ -316,10 +322,9 @@ unsigned int Conversion(unsigned char canal){
 }
 
 void okmenu(void){
-    if(menu==1) ContarReal();
-    else if(menu==2);
-    else if(menu==3) escenario1();
-    
+    if(menu==1) ContarReal(); //comienza a contar
+    else if(menu==2); //no retorna a ningun lado
+    else if(menu==3) escenario1(); //retorna al principal de conteo desde la patalla de finalizar  
 }
 
 void interrupt ISR(void) {
@@ -367,4 +372,17 @@ void interrupt ISR(void) {
         LATA1 = !LATA1; //toggle!
         Trasmitir();
     }
+}
+
+//funcion donde maper el valor del potenciomentro entre 255 y 0
+// duty_pre = (potenciomentro * 255) / 1024
+// //du
+
+void Duty_motor(float ADC){
+    float escalarADC = (ADC/1024)*249;
+   // int escalarADC = ADC;
+    if(escalarADC >= 249) escalarADC= 249;
+    else if(escalarADC < 0 ) escalarADC = 0;
+    CCPR1L=(int) escalarADC;
+
 }

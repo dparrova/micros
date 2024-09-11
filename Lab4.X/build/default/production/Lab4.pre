@@ -5872,9 +5872,13 @@ void ContarReal(void);
 void Reiniciar(void);
 void Terminar(void);
 void Trasmitir(void);
-unsigned int Conversion(unsigned char);
 void blacklighttoggle(void);
 void vaciar(void);
+
+
+unsigned int Conversion(unsigned char);
+
+void Duty_motor(float);
 
 void interrupt ISR(void);
 
@@ -5911,6 +5915,15 @@ RBIF = 0;
 RBIE = 1;
 GIE = 1;
 ADCON1bits.PCFG = 0x0E;
+
+PR2 = 249;
+CCPR1L= 125;
+T2CON = 0;
+CCP1CON = 12;
+TMR2 =0 ;
+TMR2ON =1;
+
+
 Lcd_Init();
 
 Lcd_CGRAM_Init();
@@ -5949,12 +5962,11 @@ Lcd_Clear();
 escenario1();
 
 while (1) {
-resultado_ADC=Conversion(0);
+
+
+resultado_ADC= Conversion(0);
+Duty_motor(resultado_ADC);
 sprintf(buffer, "Valor de ADC = %u", resultado_ADC);
-
-if(resultado_ADC>550) LATC2 = 1;
-else LATC2 = 0;
-
 
 pina0 = PORTAbits.RA2;
 if (mostrar && pina0==1) {
@@ -6105,25 +6117,19 @@ digito = 1;
 escenario2();
 }
 
-
-
 void Terminar(void){
-
 vaciar();
 escenario1();
-
 }
 
 void Trasmitir(void){
 int i;
-
 for(i=0;buffer[i]!='\0';i++)
 {
 while(TRMT==0);
 TXREG = buffer[i];
 }
 TXREG = '\n';
-
 }
 
 unsigned int Conversion(unsigned char canal){
@@ -6137,7 +6143,6 @@ void okmenu(void){
 if(menu==1) ContarReal();
 else if(menu==2);
 else if(menu==3) escenario1();
-
 }
 
 void interrupt ISR(void) {
@@ -6185,4 +6190,14 @@ TMR0 = 3036;
 LATA1 = !LATA1;
 Trasmitir();
 }
+}
+
+# 381
+void Duty_motor(float ADC){
+float escalarADC = (ADC/1024)*249;
+
+if(escalarADC >= 249) escalarADC= 249;
+else if(escalarADC < 0 ) escalarADC = 0;
+CCPR1L=(int) escalarADC;
+
 }
