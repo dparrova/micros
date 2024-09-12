@@ -4,7 +4,10 @@
 #pragma config FOSC = INTOSC_EC
 #pragma config LVP = OFF
 #pragma config PBADEN = OFF
-#define _XTAL_FREQ 1000000
+
+#define _XTAL_FREQ 8000000
+#define TRIGGER RC0
+#define ECHO RC1
 
 #include <xc.h>
 #include <stdio.h>
@@ -20,27 +23,27 @@ int decena = 0;
 int unidad = 0;
 int digito = 1;
 float t = 24.32;
-char buffer[20] = "valor de ADC=";
+char buffer[30] = "Iniciando";
 
- int mostrar = 0;
- int cantidad = 0;
- int contador = 0;
- int cantidadResta = 0;
- int cantidadRestaUnidad = 0;
- int cantidadRestaDecena = 0;
- int contadorUnidad = 0;
- int contadorDecena = 0;
- 
- unsigned int resultado_ADC; //VARIABLE DE ADC
+int mostrar = 0;
+int cantidad = 0;
+int contador = 0;
+int cantidadResta = 0;
+int cantidadRestaUnidad = 0;
+int cantidadRestaDecena = 0;
+int contadorUnidad = 0;
+int contadorDecena = 0;
+
+unsigned int resultado_ADC; //VARIABLE DE ADC
 
 int color[] = {2, 6, 4, 5, 1, 0}; //magenta, azul, cyan, verde, amarillo y blanco
 int rojo = 3;
 
-const char figura_1[8] = {0x0A, 0x0A, 0x0A, 0x00, 0x11, 0x11, 0x0E, 0x00};
-const char figura_2[8] = {0x04, 0x11, 0x0E, 0x04, 0x04, 0x0A, 0x11, 0x00};
+const char figura_1[8] = {0x0A, 0x0A, 0x0A, 0x00, 0x11, 0x11, 0x0E, 0x00};//cara
+const char figura_2[8] = {0x04, 0x11, 0x0E, 0x04, 0x04, 0x0A, 0x11, 0x00};//hombre
 const char figura_3[8] = {0x03, 0x03, 0x02, 0x07, 0x06, 0x0E, 0x0A, 0x13}; //dinosaurio
-const char figura_4[8] = {0x04, 0x0E, 0x0A, 0x0A, 0x1F, 0x1B, 0x1F, 0x00};
-const char figura_5[8] = {0x0F, 0x09, 0x1C, 0x08, 0x02, 0x07, 0x12, 0x1E};
+const char figura_4[8] = {0x04, 0x0E, 0x0A, 0x0A, 0x1F, 0x1B, 0x1F, 0x00};//senal peligro
+const char figura_5[8] = {0x0F, 0x09, 0x1C, 0x08, 0x02, 0x07, 0x12, 0x1E};// senal reiniciar
 
 
 void escenario1(void);
@@ -57,6 +60,9 @@ void Trasmitir(void);
 void blacklighttoggle(void);
 void vaciar(void);
 
+unsigned char MedirDistancia(void); //ultrasonido
+unsigned char etimeout = 0, ctimeout = 0;
+
 
 unsigned int Conversion(unsigned char); //ADC 
 
@@ -65,47 +71,56 @@ void Duty_motor(float);
 void interrupt ISR(void);
 
 void main() {
-    ADCON0=0b00000001;
-    ADCON2=0b10001000;
-   
+    unsigned char d;
+    unsigned int distanciaContar;
+    OSCCON = 0b01110000; //oscilador interno se ajusta a 8 MHz, ajustar tambien para el LCD
+    __delay_ms(1); //se espera que se estabilice el oscilador interno
+
+    ADCON0 = 0b00000001;
+    ADCON2 = 0b10001000;
+
     int pina0;
     TRISE = 0;
     TRISD = 0;
     TRISA = 0b00000001;
-    TRISC = 0b00000000;
-    
+    TRISC = 0b00000010;
+
     LATD = 0b00000000; // DISPLAY  SEGMENTS
     LATE = 0b00000111; //LED RGB
 
-    LATA5=1;
+    LATA5 = 1; //pinde de backlitgh
     TXSTA = 0b00100100;
     RCSTA = 0b10000000;
-    BAUDCON = 0b00001000; 
-    SPBRG = 25;
-    
+    BAUDCON = 0b00001000;
+    SPBRG = 207; // 25 para 1Mhz 207 para 8Mhz
     unsigned char i;
     TRISB = 0b11110000;
     LATB = 0b00000000;
     RBPU = 0;
     __delay_ms(100);
+    
     TMR0 = 3036;
-    T0CON = 0b00000001;
+    T0CON = 0b00000100; //Ultrasonido; sobreflujo 1segundo 
     TMR0IF = 0;
     TMR0IE = 1;
     TMR0ON = 1;
     RBIF = 0;
     RBIE = 1;
     GIE = 1;
-    ADCON1bits.PCFG = 0x0E;           // Coloca todos los pines como digitales
-    
+    ADCON1bits.PCFG = 0x0E; // Coloca todos los pines como digitales
+
     PR2 = 249; // PERIDO DE 1KHZ
-    CCPR1L= 125; // DUTY CICLE
-    T2CON = 0; // PRESCALER DE 1
+    CCPR1L = 125; // DUTY CICLE
+    T2CON = 1; // PRESCALER DE 4
     CCP1CON = 12; // MODO PWM
-    TMR2 =0 ; //INICA EN SERO 
-    TMR2ON =1;
-    
-    
+
+
+    T1CON = 0b10010000; //Ajuste de timer1: prescaler 2 para ultrasonido
+
+    TMR2 = 0; //INICA EN CERO 
+    TMR2ON = 1;
+
+
     Lcd_Init(); // Inicializa la pantalla LCD
 
     Lcd_CGRAM_Init(); // Accede a la CRGAM
@@ -142,29 +157,29 @@ void main() {
     }
     Lcd_Clear();
     escenario1();
-    
+
     while (1) {
-        
-//        
-    resultado_ADC= Conversion(0);
-    Duty_motor(resultado_ADC);
-    sprintf(buffer, "Valor de ADC = %u", resultado_ADC);
-    
-    pina0 = PORTAbits.RA2; 
-    if (mostrar && pina0==1) {
-        ContarReal();
-       
-    }
+           
+         resultado_ADC = Conversion(0);
+         Duty_motor(resultado_ADC);
+         
+           d=MedirDistancia();
+           sprintf(buffer, "Distancia = %d cm \nPWM = %u \n", d,(int) resultado_ADC);
+             //Se realiza la medición de distancia
+           distanciaContar; atoi(d);
+     
+          if(menu==2 &&  distanciaContar<9) ContarReal();
+          __delay_ms(1000);
     };
 
 }
 
-void blacklighttoggle(void){
-    LATA5=!LATA5;
+void blacklighttoggle(void) {
+    LATA5 = !LATA5;
 }
 
 void escenario1(void) {
-    menu=1;
+    menu = 1;
     Lcd_Clear();
     Lcd_Set_Cursor(1, 1);
     Lcd_Write_String("Piezas a contar:");
@@ -175,8 +190,8 @@ void escenario1(void) {
     Lcd_Blink();
 };
 
-void escenario2(void) { 
-    menu=2;
+void escenario2(void) {
+    menu = 2;
     mostrar = 1;
     Lcd_Clear();
     Lcd_NoBlink();
@@ -194,11 +209,11 @@ void escenario2(void) {
     Lcd_Set_Cursor(2, 14);
     Lcd_Write_String("#=X");
     Lcd_Write_Char(3);
-    
+
 };
 
 void escenario3(void) {
-    menu=3;
+    menu = 3;
     Lcd_Clear();
     Lcd_NoBlink();
     Lcd_Set_Cursor(1, 1);
@@ -217,7 +232,7 @@ void escenario4(void) { //PARADA DE EMERGENCIA
     Lcd_Write_String("Emergencia ");
     Lcd_Write_Char(3);
     flagParar = 0;
-    LATE=rojo;
+    LATE = rojo;
 
 };
 
@@ -236,8 +251,7 @@ void PiezaAContar(char a) {
         if (decena >= 6) decena = 5;
         Lcd_Write_Char(0b00110000 + decena);
         digito++;
-    }
-    else if (digito == 2) {
+    } else if (digito == 2) {
         unidad = a & 0x0f;
         Lcd_Write_Char(0b00110000 + unidad);
         digito++;
@@ -252,79 +266,78 @@ void borrarDigito(void) {
         Lcd_Write_Char(' ');
         Lcd_Set_Cursor(2, digito - 1);
         digito--;
-        if(digito == 1) decena = 0;
-        else if(digito == 2) unidad = 0;
+        if (digito == 1) decena = 0;
+        else if (digito == 2) unidad = 0;
     }
 }
 
-void ContarReal(void){
+void ContarReal(void) {
     cantidad = (decena * 10) + unidad;
     contador++;
-    cantidadResta = cantidad - contador +1;
-    cantidadRestaUnidad =0b00110000 + cantidadResta%10;
-    cantidadRestaDecena =0b00110000 + cantidadResta/10;
-    contadorUnidad = (contador-1)%10;
-    contadorDecena = (contador-1)/10;
-    
+    cantidadResta = cantidad - contador + 1;
+    cantidadRestaUnidad = 0b00110000 + cantidadResta % 10;
+    cantidadRestaDecena = 0b00110000 + cantidadResta / 10;
+    contadorUnidad = (contador - 1) % 10;
+    contadorDecena = (contador - 1) / 10;
+
     LATD = contadorUnidad;
     LATE = color[contadorDecena];
     escenario2();
     __delay_ms(1000);
-    if(!cantidadResta) {
+    if (!cantidadResta) {
         vaciar();
         escenario3();
     }
-    
+
 }
 
-void vaciar(void){
-        unidad = 0 ;
-        unidad = 0;
-        cantidadRestaUnidad =0b00110000 + unidad;
-        cantidadRestaDecena =0b00110000 + unidad;
-        LATD = 0;
-        LATE = color[0];
-        contador =0;
-        digito = 1;
+void vaciar(void) {
+    unidad = 0;
+    unidad = 0;
+    cantidadRestaUnidad = 0b00110000 + unidad;
+    cantidadRestaDecena = 0b00110000 + unidad;
+    LATD = 0;
+    LATE = color[0];
+    contador = 0;
+    digito = 1;
 }
 
-void Reiniciar(void){
-       
-        cantidadRestaUnidad =0b00110000 + unidad;
-        cantidadRestaDecena =0b00110000 + decena;
-        LATD = 0;
-        LATE = color[0];
-        contador =0;
-        digito = 1;
-        escenario2();
+void Reiniciar(void) {
+
+    cantidadRestaUnidad = 0b00110000 + unidad;
+    cantidadRestaDecena = 0b00110000 + decena;
+    LATD = 0;
+    LATE = color[0];
+    contador = 0;
+    digito = 1;
+    escenario2();
 }
 
-void Terminar(void){
-        vaciar();
-        escenario1();
+void Terminar(void) {
+    vaciar();
+    escenario1();
 }
 
-void Trasmitir(void){
+void Trasmitir(void) {
     int i;
-    for(i=0;buffer[i]!='\0';i++)
-    {    
-    while(TRMT==0);
-    TXREG = buffer[i];
+    for (i = 0; buffer[i] != '\0'; i++) {
+        while (TRMT == 0);
+        TXREG = buffer[i];
     }
     TXREG = '\n';
 }
 
-unsigned int Conversion(unsigned char canal){
-    ADCON0=(ADCON0 & 0b00000011) | (canal<<2);
-    GO=1;   //bsf ADCON0,1
-    while(GO==1);
+unsigned int Conversion(unsigned char canal) {
+    ADCON0 = (ADCON0 & 0b00000011) | (canal << 2);
+    GO = 1; //bsf ADCON0,1
+    while (GO == 1);
     return ADRES;
 }
 
-void okmenu(void){
-    if(menu==1) ContarReal(); //comienza a contar
-    else if(menu==2); //no retorna a ningun lado
-    else if(menu==3) escenario1(); //retorna al principal de conteo desde la patalla de finalizar  
+void okmenu(void) {
+    if (menu == 1) ContarReal(); //comienza a contar
+    else if (menu == 2); //no retorna a ningun lado
+    else if (menu == 3) escenario1(); //retorna al principal de conteo desde la patalla de finalizar  
 }
 
 void interrupt ISR(void) {
@@ -337,24 +350,24 @@ void interrupt ISR(void) {
             if (RB4 == 0) PiezaAContar('1'); // 1
             else if (RB5 == 0) PiezaAContar('2'); // 2
             else if (RB6 == 0) PiezaAContar('3'); // 3
-            else if (RB7 == 0 && menu!=2) okmenu(); // OK
+            else if (RB7 == 0 && menu != 2) okmenu(); // OK
             else {
                 LATB = 0b11111101;
                 if (RB4 == 0) PiezaAContar('4'); //4
                 else if (RB5 == 0) PiezaAContar('5'); //5
                 else if (RB6 == 0) PiezaAContar('6'); //6
-                else if (RB7 == 0 && menu==1) borrarDigito(); // BORRAR DIGITO
+                else if (RB7 == 0 && menu == 1) borrarDigito(); // BORRAR DIGITO
                 else {
                     LATB = 0b11111011;
                     if (RB4 == 0) PiezaAContar('7'); //7
                     else if (RB5 == 0) PiezaAContar('8');
                     else if (RB6 == 0) PiezaAContar('9');
-                    else if (RB7 == 0 && menu==2) Reiniciar();
+                    else if (RB7 == 0 && menu == 2) Reiniciar();
                     else {
                         LATB = 0b11110111;
                         if (RB4 == 0) blacklighttoggle();
                         else if (RB5 == 0) PiezaAContar('0');
-                        else if (RB6 == 0 && menu==2) Terminar();
+                        else if (RB6 == 0 && menu == 2) Terminar();
                         else if (RB7 == 0) escenario4();
                     }
                 }
@@ -371,18 +384,49 @@ void interrupt ISR(void) {
         TMR0 = 3036;
         LATA1 = !LATA1; //toggle!
         Trasmitir();
+        if (etimeout == 1) //Se cuenta cada segundo si esta habilitada la condición
+            ctimeout++; // de antibloqueo
+        else
+            ctimeout = 0; //Si no esta habilitada se reinicia la variable
+        if (ctimeout >= 2) //Si la condición de antibloqueo excede dos cuentas
+            etimeout = 0; //se coloca la habilitación del antibloqueo en 0
+
     }
 }
 
-//funcion donde maper el valor del potenciomentro entre 255 y 0
-// duty_pre = (potenciomentro * 255) / 1024
-// //du
 
-void Duty_motor(float ADC){
-    float escalarADC = (ADC/1024)*249;
-   // int escalarADC = ADC;
-    if(escalarADC >= 249) escalarADC= 249;
-    else if(escalarADC < 0 ) escalarADC = 0;
-    CCPR1L=(int) escalarADC;
+void Duty_motor(float ADC) {
+    float escalarADC = (ADC / 1024)*249; //escarlar hasta 250
+    // int escalarADC = ADC;
+    if (escalarADC >= 249) escalarADC = 249;
+    else if (escalarADC < 0) escalarADC = 0;
+    CCPR1L = (int) escalarADC;
+}
 
+unsigned char MedirDistancia(void) {
+    unsigned char aux = 0;
+    CCP2CON = 0b00000100; //Ajustar CCP en modo captura con flanco de bajada
+    CCP2IF = 0; //Iniciar bandera CCPx en 0
+    CCPR2 = 0;
+    TRIGGER = 1; //Dar inicio al sensor
+    __delay_us(10);
+    TRIGGER = 0;
+    TMR1 = 0; //Iniciamos el timer1 en 0
+    etimeout = 1; //Se habilita la condición de antibloqueo
+    while (ECHO == 0 && etimeout == 1); //Se espera que el sensor empiece la
+    //medición o que pase el antibloqueo (aprox 2s)
+    if (etimeout == 0) { //Si el sensor no responde se retorna un 0
+        return 0;
+    }
+    TMR1ON = 1; //Se da inicio al timer1 o medición de tiempo
+    while (CCP2IF == 0 && TMR1IF == 0); //Espera a que la señal de ultrasonido regrese
+    TMR1ON = 0; //Se da parada al timer 1 o medición de tiempo
+    if (TMR1IF == 1) //Se comprueba que la medición del pulso del sensor no
+        aux = 255; //exceda el rango del timer1, si es asi se limita a 255
+    else {
+        if (CCPR2 >= 14732) //Si el sensor excede 254cm se limita a este valor
+            CCPR2 = 14732;
+        aux = CCPR2 / 58 + 1; //Se calcula el valor de distancia a partir del tiempo
+    }
+    return  aux; //Se retorna la medición de distancia obtenida
 }

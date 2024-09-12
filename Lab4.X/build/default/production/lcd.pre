@@ -5699,7 +5699,7 @@ void Lcd_Cmd(char a)
 LATAbits.LA3 = 0;
 Lcd_Port(a);
 LATAbits.LA4 = 1;
-_delay((unsigned long)((4)*(1000000/4000.0)));
+_delay((unsigned long)((4)*(8000000/4000.0)));
 LATAbits.LA4 = 0;
 }
 
@@ -5755,11 +5755,11 @@ TRISDbits.TRISD5 = 0;
 TRISDbits.TRISD6 = 0;
 TRISDbits.TRISD7 = 0;
 Lcd_Port(0x00);
-_delay((unsigned long)((20)*(1000000/4000.0)));
+_delay((unsigned long)((20)*(8000000/4000.0)));
 Lcd_Cmd(0x03);
-_delay((unsigned long)((5)*(1000000/4000.0)));
+_delay((unsigned long)((5)*(8000000/4000.0)));
 Lcd_Cmd(0x03);
-_delay((unsigned long)((11)*(1000000/4000.0)));
+_delay((unsigned long)((11)*(8000000/4000.0)));
 Lcd_Cmd(0x03);
 Lcd_Cmd(0x02);
 Lcd_Cmd(0x02);
@@ -5779,11 +5779,11 @@ y = a&0xF0;
 LATAbits.LA3 = 1;
 Lcd_Port(y>>4);
 LATAbits.LA4 = 1;
-_delay((unsigned long)((40)*(1000000/4000000.0)));
+_delay((unsigned long)((40)*(8000000/4000000.0)));
 LATAbits.LA4 = 0;
 Lcd_Port(temp);
 LATAbits.LA4 = 1;
-_delay((unsigned long)((40)*(1000000/4000000.0)));
+_delay((unsigned long)((40)*(8000000/4000000.0)));
 LATAbits.LA4 = 0;
 }
 
