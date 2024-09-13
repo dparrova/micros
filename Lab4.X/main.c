@@ -33,17 +33,22 @@ int cantidadRestaUnidad = 0;
 int cantidadRestaDecena = 0;
 int contadorUnidad = 0;
 int contadorDecena = 0;
+float porcentaje = 0;
+float porcentajeManual = 1;
+int motorEstado = 1;
+
+unsigned char recibir;
 
 unsigned int resultado_ADC; //VARIABLE DE ADC
 
 int color[] = {2, 6, 4, 5, 1, 0}; //magenta, azul, cyan, verde, amarillo y blanco
 int rojo = 3;
 
-const char figura_1[8] = {0x0A, 0x0A, 0x0A, 0x00, 0x11, 0x11, 0x0E, 0x00};//cara
-const char figura_2[8] = {0x04, 0x11, 0x0E, 0x04, 0x04, 0x0A, 0x11, 0x00};//hombre
+const char figura_1[8] = {0x0A, 0x0A, 0x0A, 0x00, 0x11, 0x11, 0x0E, 0x00}; //cara
+const char figura_2[8] = {0x04, 0x11, 0x0E, 0x04, 0x04, 0x0A, 0x11, 0x00}; //hombre
 const char figura_3[8] = {0x03, 0x03, 0x02, 0x07, 0x06, 0x0E, 0x0A, 0x13}; //dinosaurio
-const char figura_4[8] = {0x04, 0x0E, 0x0A, 0x0A, 0x1F, 0x1B, 0x1F, 0x00};//senal peligro
-const char figura_5[8] = {0x0F, 0x09, 0x1C, 0x08, 0x02, 0x07, 0x12, 0x1E};// senal reiniciar
+const char figura_4[8] = {0x04, 0x0E, 0x0A, 0x0A, 0x1F, 0x1B, 0x1F, 0x00}; //senal peligro
+const char figura_5[8] = {0x0F, 0x09, 0x1C, 0x08, 0x02, 0x07, 0x12, 0x1E}; // senal reiniciar
 
 
 void escenario1(void);
@@ -90,7 +95,7 @@ void main() {
 
     LATA5 = 1; //pinde de backlitgh
     TXSTA = 0b00100100;
-    RCSTA = 0b10000000;
+    RCSTA = 0b10010000;
     BAUDCON = 0b00001000;
     SPBRG = 207; // 25 para 1Mhz 207 para 8Mhz
     unsigned char i;
@@ -98,7 +103,7 @@ void main() {
     LATB = 0b00000000;
     RBPU = 0;
     __delay_ms(100);
-    
+
     TMR0 = 3036;
     T0CON = 0b00000100; //Ultrasonido; sobreflujo 1segundo 
     TMR0IF = 0;
@@ -159,17 +164,14 @@ void main() {
     escenario1();
 
     while (1) {
-           
-         resultado_ADC = Conversion(0);
-         Duty_motor(resultado_ADC);
-         
-           d=MedirDistancia();
-           sprintf(buffer, "Distancia = %d cm \nPWM = %u \n", d,(int) resultado_ADC);
-             //Se realiza la medición de distancia
-           distanciaContar; atoi(d);
-     
-          if(menu==2 &&  distanciaContar<9) ContarReal();
-          __delay_ms(1000);
+
+
+
+        d = MedirDistancia();
+        sprintf(buffer, "Distancia = %u cm \nPWM = %u %c \n", (int) d, (int) porcentaje, 37);
+
+        if (menu == 2 && d < 9) ContarReal();
+        __delay_ms(3000);
     };
 
 }
@@ -233,6 +235,8 @@ void escenario4(void) { //PARADA DE EMERGENCIA
     Lcd_Write_Char(3);
     flagParar = 0;
     LATE = rojo;
+    CCPR1L = 0;
+    motorEstado = 0;
 
 };
 
@@ -388,19 +392,70 @@ void interrupt ISR(void) {
             ctimeout++; // de antibloqueo
         else
             ctimeout = 0; //Si no esta habilitada se reinicia la variable
-        if (ctimeout >= 2) //Si la condición de antibloqueo excede dos cuentas
+        if (ctimeout >= 1) //Si la condición de antibloqueo excede dos cuentas
             etimeout = 0; //se coloca la habilitación del antibloqueo en 0
 
+        resultado_ADC = Conversion(0);
+        Duty_motor(resultado_ADC);
+    }
+
+    if (RCIF == 1) {
+        while (RCIF == 0);
+        recibir = RCREG;
+        if (recibir == 'p' || recibir == 'P') escenario4();
+        else if (flagParar) {
+            if (recibir == 'e' || recibir == 'E') motorEstado = 1;
+            else if ((recibir == 'a' || recibir == 'A')) motorEstado = 0;
+            else if ((recibir == 'r' || recibir == 'R') && menu == 2) Reiniciar();
+            else if ((recibir == 'z' || recibir == 'Z')) {
+                porcentajeManual = 0;
+                porcentaje = 0;
+                CCPR1L = 0;
+            }
+            else if ((recibir == 'x' || recibir == 'X')) {
+                porcentajeManual = 0;
+                porcentaje = 20;
+                CCPR1L = 50;
+            }
+            else if ((recibir == 'c' || recibir == 'C')) {
+                porcentajeManual = 0;
+                porcentaje = 40;
+                CCPR1L = 100;
+            }
+            else if ((recibir == 'v' || recibir == 'V')) {
+                porcentajeManual = 0;
+                porcentaje = 60;
+                CCPR1L = 150;
+            }
+            else if ((recibir == 'b' || recibir == 'B')) {
+                porcentajeManual = 0;
+                porcentaje = 80;
+                CCPR1L = 200;
+            }
+            else if ((recibir == 'n' || recibir == 'N')) {
+                porcentajeManual = 0;
+                porcentaje = 100;
+                CCPR1L = 250;
+            }
+            else if ((recibir == 'm' || recibir == 'M')) {
+                porcentajeManual = 1;
+            };
+        };
     }
 }
 
-
 void Duty_motor(float ADC) {
-    float escalarADC = (ADC / 1024)*249; //escarlar hasta 250
-    // int escalarADC = ADC;
-    if (escalarADC >= 249) escalarADC = 249;
-    else if (escalarADC < 0) escalarADC = 0;
-    CCPR1L = (int) escalarADC;
+    if (motorEstado) {
+        float escalarADC = (ADC / 1024)*249; //escarlar hasta 250
+        // int escalarADC = ADC;
+        if (escalarADC >= 249) escalarADC = 249;
+        else if (escalarADC < 0) escalarADC = 0;
+        if(porcentajeManual){
+        porcentaje = escalarADC * 0.4;
+        CCPR1L = (int) escalarADC;
+        }
+    }
+    else CCPR1L = 0;
 }
 
 unsigned char MedirDistancia(void) {
@@ -428,5 +483,5 @@ unsigned char MedirDistancia(void) {
             CCPR2 = 14732;
         aux = CCPR2 / 58 + 1; //Se calcula el valor de distancia a partir del tiempo
     }
-    return  aux; //Se retorna la medición de distancia obtenida
+    return aux; //Se retorna la medición de distancia obtenida
 }

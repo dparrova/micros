@@ -1,7 +1,7 @@
 /* File: I2C_LCD.h */
 #include <xc.h>
 
-#define _XTAL_FREQ    1000000
+#define _XTAL_FREQ    8000000
 
 #define USE_CGRAM_LCD
 

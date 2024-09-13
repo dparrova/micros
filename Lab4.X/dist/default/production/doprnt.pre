@@ -284,46 +284,28 @@ switch(c = *f++) {
 case 0:
 goto alldone;
 
-# 723
-case 'd':
-case 'i':
-break;
+# 810
+case 'c':
 
-# 828
+# 825
+c = (char)(*(int *)__va_arg((*(int **)ap), (int)0));
+
+
 default:
 
-# 839
+# 835
+((*sp++ = (c)));
 continue;
 
-
-
+# 843
 case 'u':
-flag |= 0x40;
+flag |= 0xC0;
 break;
 
 
 }
 
-# 1277
-if((flag & 0x40) == 0x00)
-
-{
-
-# 1285
-val = (unsigned int)(*(int *)__va_arg((*(int **)ap), (int)0));
-
-if((int)val < 0) {
-flag |= 0x03;
-val = -val;
-}
-
-}
-
-else
-
-
-
-
+# 1299
 {
 
 # 1312
@@ -337,10 +319,6 @@ break;
 
 # 1448
 {
-
-# 1464
-if(flag & 0x03)
-((*sp++ = ('-')));
 
 # 1495
 }
